@@ -1,0 +1,676 @@
+<html>
+<script>
+var formValidation = {};
+formValidation.countryCodes = ["AR","AU","AT","BE","BR","CA","CN","DK","FI","FR","DE",
+    "HK","IN","IT","JP","MX","NL","NO","PL","RU","SG","ZA","ES","SE","CH","TR","US","GB"];
+
+
+formValidation.isCountryCode = function(countrycode)
+{
+    for (var i=0; i < formValidation.countryCodes.length; i++)
+    {
+        if (countrycode == formValidation.countryCodes[i])
+        {
+            return 1;
+        }
+    }
+    return 0;
+}
+
+
+formValidation.isDate = function(value)
+{
+    var checkFormat = /(\d{4})(\d{2})(\d{2})/g;
+    match = checkFormat.exec(value);
+
+    if (match ==null)
+    {
+        return 0;
+    }
+    else
+    {
+        var year=match[0];
+        var month = match[1];
+        var day = match[2];
+        var date = new Date(year,month,day);
+        if(date)
+        {
+            return 1;
+        }
+        else
+        {
+            return 0;
+        }
+    }
+
+}
+
+formValidation.isKeyword = function(value)
+{
+
+    if (value.length <= 0)
+    {
+        console.log("Keine Daten eingegeben")
+        return 0;
+    }
+    else
+    {
+        return 1;
+    }
+}
+
+formValidation.isDateYearMonth = function(value)
+{
+    if (value.length > 6)
+    {
+        console.log("Zu viele Zeichen")
+        return 0;
+    }
+    else
+    {
+        var checkFormat = /(\d{4})(\d{2})/g;
+        match = checkFormat.exec(value);
+
+        if (match ==null)
+        {
+            return 0;
+        }
+        else
+        {
+            var year=match[1];
+            var yearObject = new Date(year);
+            var getYear= yearObject.getFullYear();
+
+            var month = match[2];
+            var monthObject = new Date(month);
+            var getMonth= monthObject.getMonth()+1;
+            console.log("Monat: ",getMonth, "Jahr: ", getYear);
+
+            //var date =new Date(year, getMonth, 0, 0, 0, 0, 0)
+            if(isNaN(getYear) || isNaN(getMonth))
+            {
+                return 0;
+            }
+            else
+            {
+                return 1;
+            }
+        }
+    }
+}
+
+formValidation.isDateYearMonthDay = function(value)
+{
+    if (value.length > 8)
+    {
+        console.log("Zu viele Zeichen")
+        return 0;
+    }
+    else
+    {
+        var checkFormat = /(\d{4})(\d{2})(\d{2})/g;
+        match = checkFormat.exec(value);
+
+        if (match ==null)
+        {
+            return 0;
+        }
+        else
+        {
+
+        if (match.length != 4)  return 0;
+
+           var year = match[1];
+           var month = match[2]-1;
+           var date = match[3];
+           var parsedDate = new Date(year,month,date);
+
+            console.log("Is Date valid: ", parsedDate);
+
+            if (parsedDate.getFullYear() != year) return 0;
+            if (parsedDate.getMonth() != month) return 0;
+            if (parsedDate.getDate() != date) return 0;
+
+            //var date =new Date(year, getMonth, 0, 0, 0, 0, 0)
+            if(parsedDate instanceof Date && parsedDate != "Invalid Date"  )
+            {
+                return 1;
+            }
+            return 0;
+        }
+    }
+}
+
+
+
+
+formValidation.getFieldState = function(field,isValid)
+{
+    if (field.el.getAttribute('data-required') == 1)
+    {
+        return isValid;
+    }
+    else
+    {
+        return field.el.value.length == 0 ? true : isValid;
+    }
+}
+
+formValidation.checkDateFrom = function(value)
+{
+//Check here for Valid date
+
+}
+
+formValidation.isSorted = function(value)
+{
+    if (value =="desktop" || value == "mobile" || value =="smartphone" || value=="tablet" || value=="keyword" || value =="")
+    {
+        return 1;
+    }
+    else
+    {
+        return 0;
+    }
+}
+
+formValidation.isUrl = function(value)
+{
+    return value.match(/^[a-zA-Z0-9\.]{1,61}\.[a-zA-Z]{2,}$/) == null ? 0 : 1;
+}
+
+
+formValidation.isInteger = function(value)
+{
+    return (value && value % 1 === 0 && value.length != 0) ? 1 : 0;
+}
+
+
+
+formValidation.setValidator= function (field,valid,msg)
+{
+    var validator = field.el.nextElementSibling;
+    if (!valid)
+    {
+        validator.classList.add('active');
+        validator.innerHTML = msg;
+    }
+    else
+    {
+        validator.classList.remove('active');
+        validator.innerHTML = '';
+    }
+}
+
+formValidation.formValidator = function()
+    {
+
+        var fields = frontEnd.collectDataFromFields();
+        //console.log(fields);
+
+        var formState = {};
+        var isValid = false;
+        for (var i = 0; i < fields.length; i++)
+        {
+            var field = fields[i];
+
+            if (field.key =="url")
+            {
+                var isValid = formValidation.isUrl(field.val);
+
+                if (field.required == "0" && field.val == "")
+                {
+                    console.log("field is optional");
+                }
+                else
+                {
+                    field.el.setAttribute('data-valid',isValid);
+                    formValidation.setValidator(field,isValid,'Please enter something like example.com');
+                }
+            }
+            if (field.key =="countrycode")
+            {
+                var countrycode = field.val;
+
+                if (field.required == "0" && field.val == "")
+                {
+                    console.log("field is optional");
+                }
+                else
+                {
+                    var isValid = formValidation.isCountryCode(countrycode);
+
+                    field.el.setAttribute('data-valid',isValid);
+
+                    formValidation.setValidator(field,isValid,'Please enter a valid Countrycode');
+                }
+            }
+            if (field.key =="url_1")
+            {
+                var isValid = formValidation.isUrl(field.val);
+
+                if (field.required == "0" && field.val == "")
+                {
+                    console.log("field is optional");
+                }
+                else
+                {
+                    field.el.setAttribute('data-valid',isValid);
+
+                    formValidation.setValidator(field,isValid,'Please enter something like example.com');
+                }
+            }
+            if (field.key =="url_2")
+            {
+                var isValid = formValidation.isUrl(field.val);
+
+                if (field.required == "0" && field.val == "")
+                {
+                    console.log("field is optional");
+                }
+                else
+                {
+                    field.el.setAttribute('data-valid',isValid);
+
+                    formValidation.setValidator(field,isValid,'Please enter something like example.com');
+                }
+            }
+            if (field.key =="position_from")
+            {
+
+                var position_from = field.val;
+
+                if (field.required == "0" && field.val == "")
+                {
+                    console.log("field is optional");
+                }
+                else
+                {
+
+                    var isValid = formValidation.isInteger(position_from);
+
+                    formValidation.setValidator(field,isValid,'Please enter a valid integer');
+
+                    field.el.setAttribute('data-valid',isValid);
+
+                }
+            }
+            if (field.key =="position_to")
+            {
+                var position_to = field.val;
+
+                if (field.required == "0" && field.val == "")
+                {
+                    console.log("field is optional");
+                }
+                else
+                {
+                    var isValid = formValidation.isInteger(position_to);
+
+                    formValidation.setValidator(field,isValid,'Please enter a valid integer');
+
+                    field.el.setAttribute('data-valid',isValid);
+                }
+            }
+            if (field.key =="limit")
+            {
+                var limit = field.val;
+
+                if (field.required == "0" && field.val == "")
+                {
+                    console.log("field is optional");
+                }
+                else
+                {
+                    var isValid = formValidation.isInteger(limit);
+
+                    formValidation.setValidator(field,isValid,'Please enter a valid integer');
+
+                    field.el.setAttribute('data-valid',isValid);
+                }
+            }
+            if (field.key =="offset")
+            {
+                var limit = field.val;
+
+                if (field.required == "0" && field.val == "")
+                {
+                    console.log("field is optional");
+                }
+                else
+                {
+                    var isValid = formValidation.isInteger(limit);
+
+                    formValidation.setValidator(field,isValid,'Please enter a valid integer');
+
+                    field.el.setAttribute('data-valid',isValid);
+                }
+            }
+            if (field.key =="traffic_from")
+            {
+                var traffic_from = field.val;
+
+                if (field.required == "0" && field.val == "")
+                {
+                    console.log("field is optional");
+                }
+                else
+                {
+                    var isValid = formValidation.isInteger(traffic_from);
+
+                    formValidation.setValidator(field,isValid,'Please enter a valid integer');
+
+                    field.el.setAttribute('data-valid',isValid);
+                }
+            }
+            if (field.key =="traffic_to")
+            {
+                var traffic_to = field.val;
+
+                if (field.required == "0" && field.val == "")
+                {
+                    console.log("field is optional");
+                }
+                else
+                {
+                    var isValid = formValidation.isInteger(traffic_to);
+
+                    formValidation.setValidator(field,isValid,'Please enter a valid integer');
+
+                    field.el.setAttribute('data-valid',isValid);
+                }
+            }
+            if (field.key =="project_id")
+            {
+                var project_id = field.val;
+
+                if (field.required == "0" && field.val == "")
+                {
+                    console.log("field is optional");
+                }
+                else
+                {
+                    var isValid = formValidation.isInteger(project_id);
+
+                    formValidation.setValidator(field,isValid,'Please enter a valid integer');
+
+                    field.el.setAttribute('data-valid',isValid);
+                }
+            }
+            if (field.key =="sort")
+            {
+                var sort = field.val;
+
+                if (field.required == "0" && field.val == "")
+                {
+                    console.log("field is optional");
+                }
+                else
+                {
+                    var isValid = formValidation.isSorted(sort);
+
+                    formValidation.setValidator(field,isValid,'Please enter a valid xyz');
+
+                    field.el.setAttribute('data-valid',isValid);
+                }
+            }
+            if (field.key =="date")
+            {
+                var date = field.val;
+
+                if (field.required == "0" && field.val == "")
+                {
+                    console.log("field is optional");
+                }
+                else
+                {
+                    var isValid = formValidation.isDate(date);
+
+                    formValidation.setValidator(field,isValid,'Please enter a valid Date: YYYYMMDD');
+
+                    field.el.setAttribute('data-valid',isValid);
+                }
+            }
+            if (field.key =="year_month")
+            {
+                var yearMonth = field.val;
+
+                if (field.required == "0" && field.val == "")
+                {
+                    console.log("field is optional");
+                }
+                else
+                {
+
+                    var isValid = formValidation.isDateYearMonth(yearMonth);
+
+                    formValidation.setValidator(field,isValid,'Please enter a valid Date: YYYYMM');
+
+                    field.el.setAttribute('data-valid',isValid);
+                }
+            }
+            if (field.key =="date_from")
+            {
+                var dateFrom = field.val;
+                if (field.required == "0" && field.val == "")
+                {
+                    console.log("field is optional");
+                }
+                else
+                {
+                    var isValid = formValidation.isDateYearMonthDay(dateFrom);
+
+                    formValidation.setValidator(field,isValid,'Please enter a valid Date: YYYYMMDD');
+
+                    field.el.setAttribute('data-valid',isValid);
+                }
+
+            }
+           if (field.key =="date_to")
+            {
+                var dateTo = field.val;
+                if (field.required == "0" && field.val == "")
+                {
+                    console.log("field is optional");
+                }
+                else
+                {
+                    var isValid = formValidation.isDateYearMonthDay(dateTo);
+
+                    formValidation.setValidator(field,isValid,'Please enter a valid Date: YYYYMMDD');
+
+                    field.el.setAttribute('data-valid',isValid);
+                }
+
+            }
+            if (field.key =="position_from")
+            {
+                var positionFrom = field.val;
+                if (field.required == "0" && field.val == "")
+                {
+                    console.log("field is optional");
+                }
+                else
+                {
+                    var isValid = formValidation.isInteger(positionFrom);
+
+                    formValidation.setValidator(field,isValid,'Please enter a valid integer');
+
+                    field.el.setAttribute('data-valid',isValid);
+                }
+
+            }
+           if (field.key =="position_to")
+            {
+                var positionTo = field.val;
+                if (field.required == "0" && field.val == "")
+                {
+                    console.log("field is optional");
+                }
+                else
+                {
+                    var isValid = formValidation.isInteger(positionTo);
+
+                    formValidation.setValidator(field,isValid,'Please enter a valid integer');
+
+                    field.el.setAttribute('data-valid',isValid);
+                }
+
+
+            }
+           if (field.key =="search_volume_monthly_from")
+            {
+                var searchVolumeMonthlyFrom = field.val;
+                if (field.required == "0" && field.val == "")
+                {
+                    console.log("field is optional");
+                }
+                else
+                {
+                    var isValid = formValidation.isInteger(searchVolumeMonthlyFrom);
+
+                    formValidation.setValidator(field,isValid,'Please enter a valid integer');
+
+                    field.el.setAttribute('data-valid',isValid);
+                }
+
+
+            }
+           if (field.key =="search_volume_monthly_to")
+            {
+                var searchVolumeMonthlyTo = field.val;
+                if (field.required == "0" && field.val == "")
+                {
+                    console.log("field is optional");
+                }
+                else
+                {
+                    var isValid = formValidation.isInteger(searchVolumeMonthlyTo);
+
+                    formValidation.setValidator(field,isValid,'Please enter a valid integer');
+
+                    field.el.setAttribute('data-valid',isValid);
+                }
+
+
+            }
+           if (field.key =="traffic_monthly_from")
+            {
+                var trafficMonthly = field.val;
+                if (field.required == "0" && field.val == "")
+                {
+                    console.log("field is optional");
+                }
+                else
+                {
+                    var isValid = formValidation.isInteger(trafficMonthly);
+
+                    formValidation.setValidator(field,isValid,'Please enter a valid integer');
+
+                    field.el.setAttribute('data-valid',isValid);
+                }
+
+
+            }
+           if (field.key =="keyword")
+            {
+                var keyword = field.val;
+                if (field.required == "0" && field.val == "")
+                {
+                    console.log("field is optional");
+                }
+                else
+                {
+                    var isValid = formValidation.isKeyword(keyword);
+
+                    formValidation.setValidator(field,isValid,'Please enter a Keyword');
+
+                    field.el.setAttribute('data-valid',isValid);
+                }
+
+
+            }
+           if (field.key =="se_id")
+            {
+                var keyword = field.val;
+                if (field.required == "0" && field.val == "")
+                {
+                    console.log("field is optional");
+                }
+                else
+                {
+                    var isValid = formValidation.isKeyword(keyword);
+
+                    formValidation.setValidator(field,isValid,'Please enter a valid SE ID');
+
+                    field.el.setAttribute('data-valid',isValid);
+                }
+
+
+            }
+            if (field.key =="keyword_limit")
+            {
+                var keyword = field.val;
+                if (field.required == "0" && field.val == "")
+                {
+                    console.log("field is optional");
+                }
+                else
+                {
+                    var isValid = formValidation.isInteger(keyword);
+
+                    formValidation.setValidator(field,isValid,'Please enter a valid Keyword Limit');
+
+                    field.el.setAttribute('data-valid',isValid);
+                }
+
+
+
+            }
+            if (field.key =="trend_interval")
+            {
+                var keyword = field.val;
+                if (field.required == "0" && field.val == "")
+                {
+                    console.log("field is optional");
+                }
+                else
+                {
+                    var isValid = formValidation.isInteger(keyword);
+
+                    formValidation.setValidator(field,isValid,'Please enter a valid Trend Interval');
+
+                    field.el.setAttribute('data-valid',isValid);
+                }
+
+
+
+            }
+
+            formState[field.key] = formValidation.getFieldState(field,isValid);
+        }
+
+
+        var isFormValid = "";
+        console.log("Status-1",isFormValid);
+        for (var key in formState)
+        {
+            if (!formState[key])
+            {
+                isFormValid = false;
+                console.log('Form is unvalid at',key);
+                return;
+            }
+        }
+
+        if (isFormValid = true)
+        {
+            frontEnd.getDataFromApi();
+        }
+        console.log("Status-0",isFormValid);
+
+    }
+
+
+    </script>
+    </html>

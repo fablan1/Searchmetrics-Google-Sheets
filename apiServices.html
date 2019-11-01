@@ -1,0 +1,2019 @@
+
+<script>
+
+    var services = [];
+    var serviceCategory = {};
+
+    //Research-Objects
+    serviceCategory.organic = {};
+    serviceCategory.keywords = {};
+    serviceCategory.paid = {};
+    serviceCategory.links = {};
+    serviceCategory.universal = {};
+    serviceCategory.social = {};
+    serviceCategory.content = {};
+
+    //Project-Organic
+    serviceCategory.projectOrganic ={};
+    serviceCategory.projectOptimization = {};
+    serviceCategory.projectLinks = {};
+    serviceCategory.projectTraffic = {};
+    serviceCategory.projectKeywords ={};
+    serviceCategory.projectSocial = {};
+    serviceCategory.projectPerformance = {};
+
+
+    //<editor-fold desc="RESEARCH ORGANIC">
+    serviceCategory.organic.GetCountDomainKeyword =
+        {
+            fullServiceName:"ResearchOrganicGetCountDomainKeyword",
+            shortServiceName:"GetCountDomainKeyword",
+            responseExample: "Test",
+            id:"ResearchOrganic",
+            description:"Number of organic keywords for a given domain.This call returns the number of organic keywords with a ranking in the organic search results in Google for a given domain and a given country, based on the last month available in our database."
+        }
+    serviceCategory.organic.GetCountDomainKeyword.fields =
+        {
+            countrycode:{desc:"Format: US, GB, DE etc",required:true},
+            url:{desc:"Format: domain.tld, subdomain.domain.tld",required:true},
+        }
+
+    serviceCategory.organic.GetCountDomainKeywordFilter =
+        {
+            fullServiceName:"ResearchOrganicGetCountDomainKeywordFilter",
+            shortServiceName:"GetCountDomainKeywordFilter",
+            responseExample: "Test",
+            id:"ResearchOrganic",
+            description:"This call returns the number of organic keywords with a ranking in the organic search results in Google for a given domain and a given country and a given month. Please note that a certain subscription level may be needed to use this call."
+        }
+    serviceCategory.organic.GetCountDomainKeywordFilter.fields =
+        {
+            countrycode:{desc:"Format: US, GB, DE etc",required:true},
+            url:{desc:"Format: domain.tld,. subdomain.domain.tld",required:true},
+            year_month:{desc:"Format: YYYYMM",required:true},
+            position_from:{desc:"Format: string",required:false},
+            position_to:{desc:"Format: 2,3,4 etc",required:false}
+        }
+
+    serviceCategory.organic.GetCountDomainKeywordHistoric =
+        {
+            fullServiceName:"ResearchOrganicGetCountDomainKeywordHistoric",
+            shortServiceName:"GetCountDomainKeywordHistoric",
+            responseExample: "Test",
+            id:"ResearchOrganic",
+            description:"This call returns the number of organic keywords with a ranking in the organic search results in Google for a given domain and a given country. Only for the last 2 month are data available. Please note that a certain subscription level may be needed to use this call."
+        }
+    serviceCategory.organic.GetCountDomainKeywordHistoric.fields =
+        {
+            countrycode:{desc:"Format: US, GB, DE etc",required:true},
+            url:{desc:"Format: domain.tld, subdomain.domain.tld",required:true},
+            year_month:{desc:"Format: YYYYMM",required:true},
+        }
+
+    serviceCategory.organic.GetListCommonKeywords =
+        {
+            fullServiceName:"ResearchOrganicGetListCommonKeywords",
+            shortServiceName:"GetListCommonKeywords",
+            responseExample: "Test",
+            id:"ResearchOrganic",
+            description:"Get a list of the most relevant shared keywords in the organic search results for two URLs."
+        }
+    serviceCategory.organic.GetListCommonKeywords.fields =
+        {
+            countrycode:{desc:"Format: US, GB, DE etc",required:true},
+            url_1:{desc:"Format: domain.tld, subdomain.domain.tld",required:true},
+            url_2:{desc:"Format: domain.tld, subdomain.domain.tld",required:true},
+            limit:{desc:"Format: integer",required:false},
+            offset:{desc:"Format: integer",required:false}
+        }
+
+    serviceCategory.organic.GetListCompetitors =
+        {
+            fullServiceName:"ResearchOrganicGetListCompetitors",
+            shortServiceName:"GetListCompetitors",
+            responseExample: "Test",
+            id:"ResearchOrganic",
+            description:"This call returns the competitors in the organic search. A competitor is defined as a domain that shows up in the organic search results for a keyword for which the original domain has a ranking as well."
+        }
+    serviceCategory.organic.GetListCompetitors.fields =
+        {
+            countrycode:{desc:"Format: US, GB, DE etc",required:true},
+            url:{desc:"Format: domain.tld, subdomain.domain.tld",required:true},
+            currency:{desc:"",required:false},
+            limit:{desc:"Format: integer",required:false},
+            offset:{desc:"Format: integer",required:false}
+        }
+
+    serviceCategory.organic.GetListIndustrySpread =
+        {
+            fullServiceName:"ResearchOrganicGetListIndustrySpread",
+            shortServiceName:"GetListIndustrySpread",
+            responseExample: "Test",
+            id:"ResearchOrganic",
+            description:"Searchmetrics organizes all analyzed keywords into standard industry sectors. The Industry Spread shows the distribution of all keywords of a domain on the different industry sectors."
+        }
+    serviceCategory.organic.GetListIndustrySpread.fields =
+        {
+            countrycode:{desc:"Format: US, GB, DE etc",required:true},
+            url:{desc:"Format: domain.tld, subdomain.domain.tld",required:true}
+        }
+
+    serviceCategory.organic.GetListRankingsDomain =
+        {
+            fullServiceName:"ResearchOrganicGetListRankingsDomain",
+            shortServiceName:"GetListRankingsDomain",
+            responseExample: "Test",
+            id:"ResearchOrganic",
+            description:"This call returns a list keywords of a domain that had rankings in the organic search results in Google in a given country, based on the latest month available in our database."
+        }
+    serviceCategory.organic.GetListRankingsDomain.fields =
+        {
+            countrycode:{desc:"Format: US, GB, DE etc",required:true},
+            url:{desc:"Format: domain.tld, subdomain.domain.tld",required:true},
+            limit:{desc:"Format: integer",required:false},
+            offset:{desc:"Format: integer",required:false}
+        }
+
+    serviceCategory.organic.GetListRankingsDomainFilter =
+        {
+            fullServiceName:"ResearchOrganicGetListRankingsDomainFilter",
+            shortServiceName:"GetListRankingsDomainFilter",
+            responseExample: "Test",
+            id:"ResearchOrganic",
+            description:"This call returns a list keywords of a domain that had rankings in the organic search results in Google in a given country, based on the latest data in our database. Please note that a certain subscription level may be needed to use this call."
+        }
+    serviceCategory.organic.GetListRankingsDomainFilter.fields =
+        {
+            countrycode:{desc:"Format: US, GB, DE etc",required:true},
+            url:{desc:"Format: domain.tld, subdomain.domain.tld",required:true},
+            currency:{desc:"",required:false},
+            limit:{desc:"Format: integer -Permitted values are 10, 25, 50, 100, 250",required:false},
+            offset:{desc:"Format: integer-Offset for result set. Default is 0 ",required:false},
+            position_from:{desc:"Format: string-Filter: Lowest ranking of keywords",required:false},
+            position_to:{desc:"Format: 2,3,4 etc",required:false},
+            search_volume_monthly_from:{desc:"Format: integer",required:false},
+            search_volume_monthly_to:{desc:"Format: integer",required:true},
+            traffic_monthly_from:{desc:"Format: integer",required:false}
+        }
+
+    serviceCategory.organic.GetListRankingsDomainHistoric =
+        {
+            fullServiceName:"ResearchOrganicGetListRankingsDomainHistoric",
+            shortServiceName:"GetListRankingsDomainHistoric",
+            responseExample: "Test",
+            id:"ResearchOrganic",
+            description:"This call returns a list keywords of a domain that had rankings in the organic search results in Google in a given country in a given week. Please note that a certain subscription level may be needed to use this call."
+        }
+    serviceCategory.organic.GetListRankingsDomainHistoric.fields =
+        {
+            countrycode:{desc:"Format: US, GB, DE etc",required:true},
+            date:{desc:"",required:true},
+            url:{desc:"Format: domain.tld, subdomain.domain.tld",required:true},
+            currency:{desc:"",required:false},
+            limit:{desc:"Format: integer",required:false},
+            offset:{desc:"Format: integer",required:false}
+        }
+
+    serviceCategory.organic.GetListRankingsKeyword =
+        {
+            fullServiceName:"ResearchOrganicGetListRankingsKeyword",
+            shortServiceName:"GetListRankingsKeyword",
+            responseExample: "Test",
+            id:"ResearchOrganic",
+            description:"This call returns a list of Google's organic rankings for a given keyword, based on the previous week available in our database and ordered by position in ascending order. As well a trend in comparison to the previous week is returned."
+        }
+    serviceCategory.organic.GetListRankingsKeyword.fields =
+        {
+            countrycode:{desc:"Format: US, GB, DE etc",required:true},
+            keyword:{desc:"",required:true},
+            limit:{desc:"Format: integer",required:false},
+            offset:{desc:"Format: integer",required:false},
+        }
+
+    serviceCategory.organic.GetListRankingsKeywordHistoric =
+        {
+            fullServiceName:"ResearchOrganicGetListRankingsKeywordHistoric",
+            shortServiceName:"GetListRankingsKeywordHistoric",
+            responseExample: "Test",
+            id:"ResearchOrganic",
+            description:"This call returns a list of Google's organic rankings for a given keyword, based on the latest month available in our database and ordered by position in ascending order. As well a trend in comparison to the previous month is returned. Please note that a certain subscription level may be needed to use this call."
+        }
+    serviceCategory.organic.GetListRankingsKeywordHistoric.fields =
+        {
+            countrycode:{desc:"Format: US, GB, DE etc",required:true},
+            date:{desc:"",required:true},
+            keyword:{desc:"",required:true},
+            limit:{desc:"Format: integer",required:false},
+            offset:{desc:"Format: integer",required:false}
+        }
+
+    serviceCategory.organic.GetListRankingsKeywordLongtail =
+        {
+            fullServiceName:"ResearchOrganicGetListRankingsKeywordLongtail",
+            shortServiceName:"GetListRankingsKeywordLongtail",
+            responseExample: "Test",
+            id:"ResearchOrganic",
+            description:"This call returns a list of Google's organic rankings for a given keyword, based on the latest rankings available in our database and ordered by position in ascending order. As well a trend in comparison to the previous data point is returned. Please note that a certain subscription level may be needed to use this call."
+        }
+    serviceCategory.organic.GetListRankingsKeywordLongtail.fields =
+        {
+            countrycode:{desc:"Format: US, GB, DE etc",required:true},
+            keyword:{desc:"",required:true},
+            limit:{desc:"Format: integer",required:false},
+            offset:{desc:"Format: integer",required:false}
+        }
+
+    serviceCategory.organic.GetListSeoVisibilityCountry =
+        {
+            fullServiceName:"ResearchOrganicGetListSeoVisibilityCountry",
+            shortServiceName:"GetListSeoVisibilityCountry",
+            responseExample: "Test",
+            id:"ResearchOrganic",
+            description:"This call returns the Searchmetrics Visibility across all countries for a domain in the organic search, based on the latest data in our database. The SEO Visibility is composed of search volume and the position of ranking keywords. Each position is individually measured by a calculated factor by Searchmetrics."
+        }
+    serviceCategory.organic.GetListSeoVisibilityCountry.fields =
+        {
+            url:{desc:"Format: domain.tld, subdomain.domain.tld",required:true}
+        }
+
+    serviceCategory.organic.GetListSeoVisibilityHistoric =
+        {
+            fullServiceName:"ResearchOrganicGetListSeoVisibilityHistoric",
+            shortServiceName:"GetListSeoVisibilityHistoric",
+            responseExample: "Test",
+            id:"ResearchOrganic",
+            description:"This call returns the Searchmetrics Visibility in the organic search for a domain for a specified country based for a given timeframe."
+        }
+    serviceCategory.organic.GetListSeoVisibilityHistoric.fields =
+        {
+            countrycode:{desc:"Format: US, GB, DE etc",required:true},
+            date_from:{desc:"Format: YYYYMMDD",required:true},
+            date_to:{desc:"Format: YYYYMMDD",required:true},
+            url:{desc:"Format: domain.tld, subdomain.domain.tld",required:true}
+        }
+
+    serviceCategory.organic.GetListSeoVisibilityTop100Losers =
+        {
+            fullServiceName:"ResearchOrganicGetListSeoVisibilityTop100Losers",
+            shortServiceName:"GetListSeoVisibilityTop100Losers",
+            responseExample: "Test",
+            id:"ResearchOrganic",
+            description:"This call returns the domains with the largest absolute visibility losses for organic search results in the previous week in a given country."
+        }
+    serviceCategory.organic.GetListSeoVisibilityTop100Losers.fields =
+        {
+            countrycode:{desc:"Format: US, GB, DE etc",required:true}
+        }
+
+    serviceCategory.organic.GetListSeoVisibilityTop100Winners =
+        {
+            fullServiceName:"ResearchOrganicGetListSeoVisibilityTop100Winners",
+            shortServiceName:"GetListSeoVisibilityTop100Winners",
+            responseExample: "Test",
+            id:"ResearchOrganic",
+            description:""
+        }
+    serviceCategory.organic.GetListSeoVisibilityTop100Winners.fields =
+        {
+            countrycode:{desc:"Format: US, GB, DE etc",required:true}
+        }
+
+    serviceCategory.organic.GetListSerpSpread =
+        {
+            fullServiceName:"ResearchOrganicGetListSerpSpread",
+            shortServiceName:"GetListSerpSpread",
+            responseExample: "Test",
+            id:"ResearchOrganic",
+            description:"This data represents the relative distribution of a site's search results (SERPs) in Google in a given country based on the latest data in our database."
+        }
+    serviceCategory.organic.GetListSerpSpread.fields =
+        {
+            countrycode:{desc:"Format: US, GB, DE etc",required:true},
+            url:{desc:"Format: domain.tld, subdomain.domain.tld",required:true}
+        }
+
+    serviceCategory.organic.GetListSubdomains =
+        {
+            fullServiceName:"ResearchOrganicGetListSubdomains",
+            shortServiceName:"GetListSubdomains",
+            responseExample: "Test",
+            id:"ResearchOrganic",
+            description:"This call returns the Subdomains in the organic search. A subdomain is defined with the domain in the organic search results."
+        }
+    serviceCategory.organic.GetListSubdomains.fields =
+        {
+            countrycode:{desc:"Format: US, GB, DE etc",required:true},
+            url:{desc:"Format: domain.tld, subdomain.domain.tld",required:true},
+            limit:{desc:"Format: integer",required:false},
+            offset:{desc:"Format: integer",required:false}
+        }
+
+    serviceCategory.organic.GetValueSeoRank =
+        {
+            fullServiceName:"ResearchOrganicGetValueSeoRank",
+            shortServiceName:"GetValueSeoRank",
+            responseExample: "Test",
+            id:"ResearchOrganic",
+            description:"This call returns the SEO Visibility rank (SEORank) for a domain in a given country. The rank represents the position of the domain in the top 100,000 SEO Visibility list for the country."
+        }
+    serviceCategory.organic.GetValueSeoRank.fields =
+        {
+            countrycode:{desc:"Format: US, GB, DE etc",required:true},
+            url:{desc:"Format: domain.tld, subdomain.domain.tld",required:true}
+        }
+
+    serviceCategory.organic.GetValueSeoVisibility =
+        {
+            fullServiceName:"ResearchOrganicGetValueSeoVisibility",
+            shortServiceName:"GetValueSeoVisibility",
+            responseExample: "Test",
+            id:"ResearchOrganic",
+            description:"This call returns the Searchmetrics Visibility in the organic search for a domain for a specified country based on the latest data in our database. In addition, a trend in comparision to the previous week is delivered."
+        }
+    serviceCategory.organic.GetValueSeoVisibility.fields =
+        {
+            countrycode:{desc:"Format: US, GB, DE etc",required:true},
+            url:{desc:"Format: domain.tld, subdomain.domain.tld",required:true}
+        }
+
+    serviceCategory.organic.GetValueSeoVisibilityWorld =
+        {
+            fullServiceName:"ResearchOrganicGetValueSeoVisibilityWorld",
+            shortServiceName:"GetValueSeoVisibilityWorld",
+            responseExample: "Test",
+            id:"ResearchOrganic",
+        }
+    serviceCategory.organic.GetValueSeoVisibilityWorld.fields =
+        {
+            url:{desc:"Format: domain.tld, subdomain.domain.tld",required:true}
+        }
+
+    serviceCategory.organic.GetValueTrafficValue =
+        {
+            fullServiceName:"ResearchOrganicGetValueTrafficValue",
+            shortServiceName:"GetValueTrafficValue",
+            responseExample: "Test",
+            id:"ResearchOrganic",
+            description:"Returns the estimated cost of organic traffic if it was gained through Google AdWords advertising (for the last 2 complete months available in our database)."
+        }
+    serviceCategory.organic.GetValueTrafficValue.fields =
+        {
+            countrycode:{desc: "Format: US, GB, DE etc",required:true},
+            url:{desc:"Format: domain.tld, subdomain.domain.tld",required:true},
+            currency:{desc:"",required:false}
+        }
+
+    /**** SERVICE:RESEARCH KEYWORDS ****/
+    // </editor-fold>
+
+    //<editor-fold desc="RESEARCH KEYWORDS">
+    serviceCategory.keywords.GetListKeywordinfo =
+        {
+            fullServiceName:"ResearchKeywordsGetListKeywordinfo",
+            shortServiceName:"GetListKeywordinfo",
+            responseExample: "Test",
+            id:"ResearchKeywords",
+            description:"This call returns search-related information for a given keyword for a given country for the current month."
+        }
+    serviceCategory.keywords.GetListKeywordinfo.fields =
+        {
+            countrycode:{desc:"Format: US, GB, DE etc",required:true},
+            keyword:{desc:"",required:true},
+            currency:{desc:"",required:false}
+        }
+
+    serviceCategory.keywords.GetListKeywordinfoHistoric =
+        {
+            fullServiceName:"ResearchKeywordsGetListKeywordinfoHistoric",
+            shortServiceName:"GetListKeywordinfoHistoric",
+            responseExample: "Test",
+            id:"ResearchKeywords",
+            description:"This call returns search-related information for a given keyword for a given country for the specified month. Please note that a certain subscription level may be needed to use this call."
+        }
+    serviceCategory.keywords.GetListKeywordinfoHistoric.fields =
+        {
+            countrycode:{desc:"Format: US, GB, DE etc",required:true},
+            keyword:{desc:"",required:true},
+            year_month:{desc:"Format: YYYYMM",required:true},
+            currency:{desc:"",required:false}
+        }
+
+    serviceCategory.keywords.GetListLosers =
+        {
+            fullServiceName:"ResearchKeywordsGetListLosers",
+            shortServiceName:"GetListLosers",
+            responseExample: "Test",
+            id:"ResearchKeywords",
+            description:"This call returns the keywords with the biggest losses in absolute search volumes in comparison to the previous week for a given domain."
+        }
+    serviceCategory.keywords.GetListLosers.fields =
+        {
+            countrycode:{desc:"Format: US, GB, DE etc",required:true},
+            url:{desc:"Format: domain.tld, subdomain.domain.tld",required:true},
+            limit:{desc:"Format: integer",required:false},
+            offset:{desc:"Format: integer",required:false}
+        }
+
+    serviceCategory.keywords.GetListLosersFilter =
+        {
+            fullServiceName:"ResearchKeywordsGetListLosersFilter",
+            shortServiceName:"GetListLosersFilter",
+            responseExample: "Test",
+            id:"ResearchKeywords",
+            description:"Keywords with the highest absolute losses in organic search traffic for a given domain with filter options."
+        }
+    serviceCategory.keywords.GetListLosersFilter.fields =
+        {
+            countrycode:{desc:"Format: US, GB, DE etc",required:true},
+            date:{desc:"",required:true},
+            url:{desc:"Format: domain.tld, subdomain.domain.tld",required:true}
+        }
+
+    serviceCategory.keywords.GetListLosersHistoric =
+        {
+            fullServiceName:"ResearchKeywordsGetListLosersHistoric",
+            shortServiceName:"GetListLosersHistoric",
+            responseExample: "Test",
+            id:"ResearchKeywords",
+            description:"Keywords with the highest absolute losses in organic search traffic for a given domain for a given date."
+        }
+    serviceCategory.keywords.GetListLosersHistoric.fields =
+        {
+            countrycode:{desc:"Format: US, GB, DE etc",required:true},
+            date:{desc:"",required:true},
+            url:{desc:"Format: domain.tld, subdomain.domain.tld",required:true},
+            limit:{desc:"Format: integer",required:false},
+            offset:{desc:"Format: integer",required:false}
+        }
+
+    serviceCategory.keywords.GetListSimilarKeywords =
+        {
+            fullServiceName:"ResearchKeywordsGetListSimilarKeywords",
+            shortServiceName:"GetListSimilarKeywords",
+            responseExample: "Test",
+            id:"ResearchKeywords",
+            description:"List of keywords that contain a selected keyword."
+        }
+    serviceCategory.keywords.GetListSimilarKeywords.fields =
+        {
+            countrycode:{desc:"Format: US, GB, DE etc",required:true},
+            keyword:{desc:"",required:true},
+            limit:{desc:"Format: integer-Limit for the number of result rows",required:true},
+            offset:{desc:"Format: integer-Offset for result set. Default is 0 ",required:false}
+        }
+
+    serviceCategory.keywords.GetListWinners =
+        {
+            fullServiceName:"ResearchKeywordsGetListWinners",
+            shortServiceName:"GetListWinners",
+            responseExample: "Test",
+            id:"ResearchKeywords",
+            description:"Keywords with the highest absolute gains in organic search traffic for a given domain."
+        }
+    serviceCategory.keywords.GetListWinners.fields =
+        {
+            countrycode:{desc:"Format: US, GB, DE etc",required:true},
+            keyword:{desc:"",required:true},
+            limit:{desc:"Format: integer",required:false},
+            offset:{desc:"Format: integer",required:false}
+        }
+
+    serviceCategory.keywords.GetListWinnersFilter =
+        {
+            fullServiceName:"ResearchKeywordsGetListWinnersFilter",
+            shortServiceName:"GetListWinnersFilter",
+            responseExample: "Test",
+            id:"ResearchKeywords",
+            description:"Keywords with the highest absolute gains in organic search traffic for a given domain."
+        }
+    serviceCategory.keywords.GetListWinnersFilter.fields =
+        {
+            countrycode:{desc:"Format: US, GB, DE etc",required:true},
+            date:{desc:"",required:true},
+            url:{desc:"Format: domain.tld, subdomain.domain.tld",required:true}
+        }
+
+    serviceCategory.keywords.GetListWinnersHistoric =
+        {
+            fullServiceName:"ResearchKeywordsGetListWinnersHistoric",
+            shortServiceName:"GetListWinnersHistoric",
+            responseExample: "Test",
+            id:"ResearchKeywords",
+            description:"Keywords with the highest absolute gains in organic search traffic for a given domain with access to historic data"
+        }
+    serviceCategory.keywords.GetListWinnersHistoric.fields =
+        {
+            countrycode:{desc:"Format: US, GB, DE etc",required:true},
+            date:{desc:"",required:true},
+            url:{desc:"Format: domain.tld, subdomain.domain.tld",required:true}
+        }
+
+
+    // </editor-fold>
+
+    //<editor-fold desc="RESEARCH PAID">
+    serviceCategory.paid.GetCountDomainKeyword =
+        {
+            fullServiceName:"ResearchPaidGetCountDomainKeyword",
+            shortServiceName:"GetCountDomainKeyword",
+            responseExample: "Test",
+            id:"ResearchPaid",
+            description:"Number of paid keywords for a domain in a given country."
+        }
+    serviceCategory.paid.GetCountDomainKeyword.fields =
+        {
+            countrycode:{desc:"Format: US, GB, DE etc",required:true},
+            url:{desc:"Format: domain.tld, subdomain.domain.tld",required:true}
+        }
+
+    serviceCategory.paid.GetCountDomainKeywordFilter =
+        {
+            fullServiceName:"ResearchPaidGetCountDomainKeywordFilter",
+            shortServiceName:"GetCountDomainKeywordFilter",
+            responseExample: "Test",
+            id:"ResearchPaid",
+            description:"Number of paid keywords for a domain in a given country with filter options."
+        }
+    serviceCategory.paid.GetCountDomainKeywordFilter.fields =
+        {
+            countrycode:{desc:"Format: US, GB, DE etc",required:true},
+            url:{desc:"Format: domain.tld, subdomain.domain.tld",required:true},
+            year_month:{desc:"Format: YYYYMM",required:true},
+            position_from:{desc:"Format: string",required:false},
+            position_to:{desc:"Format: 2,3,4 etc",required:false}
+        }
+
+    serviceCategory.paid.GetCountDomainKeywordHistoric =
+        {
+            fullServiceName:"ResearchPaidGetCountDomainKeywordHistoric",
+            shortServiceName:"GetCountDomainKeywordFilter",
+            responseExample: "Test",
+            id:"ResearchPaid",
+            description:"Number of paid keywords for a domain in a given country also for previous months,"
+        }
+    serviceCategory.paid.GetCountDomainKeywordHistoric.fields =
+        {
+            countrycode:{desc:"Format: US, GB, DE etc",required:true},
+            url:{desc:"Format: domain.tld, subdomain.domain.tld",required:true},
+            year_month:{desc:"Format: YYYYMM",required:true}
+        }
+
+    serviceCategory.paid.GetListAdVariations =
+        {
+            fullServiceName:"ResearchPaidGetListAdVariations",
+            shortServiceName:"GetListAdVariations",
+            responseExample: "Test",
+            id:"ResearchPaid",
+            description:"Get a list of different ad variations."
+        }
+    serviceCategory.paid.GetListAdVariations.fields =
+        {
+            countrycode:{desc:"Format: US, GB, DE etc",required:true},
+            url:{desc:"Format: domain.tld, subdomain.domain.tld",required:true},
+            limit:{desc:"Format: integer",required:false},
+            offset:{desc:"Format: integer",required:false}
+        }
+
+    serviceCategory.paid.GetListCommonKeywords =
+        {
+            fullServiceName:"ResearchPaidGetListCommonKeywords",
+            shortServiceName:"GetListCommonKeywords",
+            responseExample: "Test",
+            id:"ResearchPaid",
+            description:"Overview comparison of the most relevant shared keywords (comeptititve keywords) for two URLs in paid search results."
+        }
+    serviceCategory.paid.GetListCommonKeywords.fields =
+        {
+            countrycode:{desc:"Format: US, GB, DE etc",required:true},
+            url_1:{desc:"Format: domain.tld, subdomain.domain.tld",required:true},
+            url_2:{desc:"Format: domain.tld, subdomain.domain.tld",required:true},
+            currency:{desc:"",required:false},
+            limit:{desc:"Format: integer",required:false},
+            offset:{desc:"Format: integer",required:false}
+        }
+
+    serviceCategory.paid.GetListCompetitors =
+        {
+            fullServiceName:"ResearchPaidGetListCompetitors",
+            shortServiceName:"GetListCompetitors",
+            responseExample: "Test",
+            id:"ResearchPaid",
+            description:"Competitor domains in the paid search."
+        }
+    serviceCategory.paid.GetListCompetitors.fields =
+        {
+            countrycode:{desc:"Format: US, GB, DE etc",required:true},
+            url:{desc:"Format: domain.tld, subdomain.domain.tld",required:true},
+            currency:{desc:"",required:false},
+            limit:{desc:"Format: integer",required:false},
+            offset:{desc:"Format: integer",required:false}
+        }
+
+    serviceCategory.paid.GetListKeywords =
+        {
+            fullServiceName:"ResearchPaidGetListKeywords",
+            shortServiceName:"GetListKeywords",
+            responseExample: "Test",
+            id:"ResearchPaid",
+            description:"Paid keywords with advertisements for a given domain"
+        }
+    serviceCategory.paid.GetListKeywords.fields =
+        {
+            countrycode:{desc:"Format: US, GB, DE etc",required:true},
+            url:{desc:"Format: domain.tld, subdomain.domain.tld",required:true},
+            limit:{desc:"Format: integer",required:false},
+            offset:{desc:"Format: integer",required:false}
+        }
+
+    serviceCategory.paid.GetListKeywordsLongtail =
+        {
+            fullServiceName:"ResearchPaidGetListKeywordsLongtail",
+            shortServiceName:"GetListKeywordsLongtail",
+            responseExample: "Test",
+            id:"ResearchPaid",
+            description:"Paid keywords with advertisements for a given domain"
+        }
+    serviceCategory.paid.GetListKeywordsLongtail.fields =
+        {
+            countrycode:{desc:"Format: US, GB, DE etc",required:true},
+            url:{desc:"Format: domain.tld, subdomain.domain.tld",required:true},
+            limit:{desc:"Format: integer",required:false},
+            offset:{desc:"Format: integer",required:false}
+        }
+
+    serviceCategory.paid.GetListPaidVisibilityHistoric =
+        {
+            fullServiceName:"ResearchPaidGetListPaidVisibilityHistoric",
+            shortServiceName:"GetListPaidVisibilityHistoric",
+            responseExample: "Test",
+            id:"ResearchPaid",
+            description:"Searchmetrics Paid Visibility for a given URL and a given country in a given timeframe."
+        }
+    serviceCategory.paid.GetListPaidVisibilityHistoric.fields =
+        {
+            countrycode:{desc:"Format: US, GB, DE etc",required:true},
+            date_from:{desc:"Format: YYYYMMDD",required:true},
+            date_to:{desc:"Format: YYYYMMDD",required:true},
+            url:{desc:"Format: domain.tld, subdomain.domain.tld",required:true}
+        }
+
+    serviceCategory.paid.GetValuePaidKpis =
+        {
+            fullServiceName:"ResearchPaidGetValuePaidKpis",
+            shortServiceName:"GetValuePaidKpis",
+            responseExample: "Test",
+            id:"ResearchPaid",
+            description:"Collection of Paid Search KPIs: paid traffic, ad budget, clicks per day, average CPC, Paid Rank"
+        }
+    serviceCategory.paid.GetValuePaidKpis.fields =
+        {
+            countrycode:{desc:"Format: US, GB, DE etc",required:true},
+            url:{desc:"Format: domain.tld, subdomain.domain.tld",required:true},
+            currency:{desc:"",required:false}
+        }
+
+    serviceCategory.paid.GetValuePaidRank =
+        {
+            fullServiceName:"ResearchPaidGetValuePaidRank",
+            shortServiceName:"GetValuePaidRank",
+            responseExample: "Test",
+            id:"ResearchPaid",
+            description:"Searchmetrics Paid Visibility rank of the domain (PaidRank)"
+        }
+    serviceCategory.paid.GetValuePaidRank.fields =
+        {
+            countrycode:{desc:"Format: US, GB, DE etc",required:true},
+            url:{desc:"Format: domain.tld, subdomain.domain.tld",required:true}
+        }
+
+    serviceCategory.paid.GetValuePaidVisibility =
+        {
+            fullServiceName:"ResearchPaidGetValuePaidVisibility",
+            shortServiceName:"GetValuePaidVisibility",
+            responseExample: "Test",
+            id:"ResearchPaid",
+            description:"Searchmetrics Paid Visibility rank of the domain (PaidRank)"
+        }
+    serviceCategory.paid.GetValuePaidVisibility.fields =
+        {
+            countrycode:{desc:"Format: US, GB, DE etc",required:true},
+            url:{desc:"Format: domain.tld, subdomain.domain.tld",required:true}
+        }
+
+
+    // </editor-fold>
+
+    //<editor-fold desc="RESEARCH LINKS">
+    serviceCategory.links.GetCountBacklinks =
+        {
+            fullServiceName:"ResearchLinksGetCountBacklinks",
+            shortServiceName:"GetCountBacklinks",
+            responseExample: "Test",
+            id:"ResearchLinks",
+            description:"Number of backlinks for a given domain, subdomain or URL."
+        }
+    serviceCategory.links.GetCountBacklinks.fields =
+        {
+            url:{desc:"Format: domain.tld, subdomain.domain.tld",required:true}
+        }
+
+    serviceCategory.links.GetCountBacklinks =
+        {
+            fullServiceName:"ResearchLinksGetCountDeeplinkRatio",
+            shortServiceName:"GetCountDeeplinkRatio",
+            responseExample: "Test",
+            id:"ResearchLinks",
+            description:"Ratio of homepage links and deeplinks for a given domain."
+        }
+    serviceCategory.links.GetCountBacklinks.fields =
+        {
+            url:{desc:"Format: domain.tld, subdomain.domain.tld",required:true}
+        }
+
+    serviceCategory.links.GetCountEduGovLinks =
+        {
+            fullServiceName:"ResearchLinksGetCountEduGovLinks",
+            shortServiceName:"GetCountEduGovLinks",
+            responseExample: "Test",
+            id:"ResearchLinks",
+            description:"Number of links from pages with an .edu or .gov top-level domain."
+        }
+    serviceCategory.links.GetCountEduGovLinks.fields =
+        {
+            url:{desc:"Format: domain.tld, subdomain.domain.tld",required:true}
+        }
+
+    serviceCategory.links.GetCountNewsDomains =
+        {
+            fullServiceName:"ResearchLinksGetCountNewsDomains",
+            shortServiceName:"GetCountNewsDomains",
+            responseExample: "Test",
+            id:"ResearchLinks",
+            description:"Number of links from news sites pointing to a given URL."
+        }
+    serviceCategory.links.GetCountNewsDomains.fields =
+        {
+            url:{desc:"Format: domain.tld, subdomain.domain.tld",required:true}
+        }
+
+    serviceCategory.links.GetCountReferringDomains =
+        {
+            fullServiceName:"ResearchLinksGetCountReferringDomains",
+            shortServiceName:"GetCountReferringDomains",
+            responseExample: "Test",
+            id:"ResearchLinks",
+            description:"Number of referring domains for a given URL (domain popularity)."
+        }
+    serviceCategory.links.GetCountReferringDomains.fields =
+        {
+            url:{desc:"Format: domain.tld, subdomain.domain.tld",required:true}
+        }
+
+    serviceCategory.links.GetCountReferringIps =
+        {
+            fullServiceName:"ResearchLinksGetCountReferringIps",
+            shortServiceName:"GetCountReferringIps",
+            responseExample: "Test",
+            id:"ResearchLinks",
+            description:"Number of referring IPs for a given URL (IP popularity)."
+        }
+    serviceCategory.links.GetCountReferringDomains.fields =
+        {
+            url:{desc:"Format: domain.tld, subdomain.domain.tld",required:true}
+        }
+
+    serviceCategory.links.GetListBacklinks =
+        {
+            fullServiceName:"ResearchLinksGetListBacklinks",
+            shortServiceName:"GetListBacklinks",
+            responseExample: "Test",
+            id:"ResearchLinks",
+            description:"Number of referring IPs for a given URL (IP popularity)."
+        }
+    serviceCategory.links.GetListBacklinks.fields =
+        {
+            url:{desc:"Format: domain.tld, subdomain.domain.tld",required:true}
+        }
+
+    serviceCategory.links.GetListLinkedPages =
+        {
+            fullServiceName:"ResearchLinksGetListLinkedPages",
+            shortServiceName:"GetListLinkedPages",
+            responseExample: "Test",
+            id:"ResearchLinks",
+            description:"List of pages of a given URL with links from external pages."
+        }
+    serviceCategory.links.GetListLinkedPages.fields =
+        {
+            url:{desc:"Format: domain.tld, subdomain.domain.tld",required:true},
+            limit:{desc:"Format: integer-Limit for the number of result rows",required:true},
+            offset:{desc:"Format: integer-Offset for result set",required:true}
+        }
+
+    serviceCategory.links.GetListLinktext =
+        {
+            fullServiceName:"ResearchLinksGetListLinktext",
+            shortServiceName:"GetListLinktext",
+            responseExample: "Test",
+            id:"ResearchLinks",
+            description:"Most frequently used link anchor texts for a given URL."
+        }
+    serviceCategory.links.GetListLinktext.fields =
+        {
+            url:{desc:"Format: domain.tld, subdomain.domain.tld",required:true},
+            limit:{desc:"Format: integer-Limit for the number of result rows",required:true},
+            offset:{desc:"Format: integer-Offset for result set",required:true}
+        }
+
+    serviceCategory.links.GetListSpsSpread =
+        {
+            fullServiceName:"ResearchLinksGetListSpsSpread",
+            shortServiceName:"GetListSpsSpread",
+            responseExample: "Test",
+            id:"ResearchLinks",
+            description:"Most frequently used link anchor texts for a given URL."
+        }
+    serviceCategory.links.GetListSpsSpread.fields =
+        {
+            url:{desc:"Format: domain.tld, subdomain.domain.tld",required:true}
+        }
+
+    serviceCategory.links.GetValueLinkRank =
+        {
+            fullServiceName:"ResearchLinksGetValueLinkRank",
+            shortServiceName:"GetValueLinkRank",
+            responseExample: "Test",
+            id:"ResearchLinks",
+            description:"Most frequently used link anchor texts for a given URL."
+        }
+    serviceCategory.links.GetValueLinkRank.fields =
+        {
+            competitors:{desc:"",required:true},
+            countrycode:{desc:"Format: US, GB, DE etc",required:true},
+            url:{desc:"Format: domain.tld, subdomain.domain.tld",required:true}
+        }
+
+
+    serviceCategory.links.GetValuePageStrength =
+        {
+            fullServiceName:"ResearchLinksGetValuePageStrength",
+            shortServiceName:"GetValuePageStrength",
+            responseExample: "Test",
+            id:"ResearchLinks",
+            description:"Searchmetrics Page Strength (SPS) for a given page."
+        }
+    serviceCategory.links.GetValuePageStrength.fields =
+        {
+            url:{desc:"Format: domain.tld, subdomain.domain.tld",required:true}
+        }
+
+
+    serviceCategory.links.PostListIsLinked =
+        {
+            fullServiceName:"ResearchLinksPostListIsLinked",
+            shortServiceName:"PostListIsLinked",
+            responseExample: "Test",
+            id:"ResearchLinks",
+            description:"Check whether a list of domains link to a specific URL."
+        }
+    serviceCategory.links.PostListIsLinked.fields =
+        {
+            domains:{desc:"",required:true},
+            url:{desc:"Format: domain.tld, subdomain.domain.tld",required:true}
+        }
+
+    serviceCategory.links.PostUrlInput =
+        {
+            fullServiceName:"ResearchLinksPostUrlInput",
+            shortServiceName:"PostUrlInput",
+            responseExample: "Test",
+            id:"ResearchLinks",
+            description:"Crawl URLs to update your backlinks."
+        }
+    serviceCategory.links.PostUrlInput.fields =
+        {
+            urls:{desc:"",required:true}
+        }
+    // </editor-fold>
+
+    //<editor-fold desc="RESEARCH UNIVERSAL">
+    serviceCategory.universal.GetListRankingsDomain =
+        {
+            fullServiceName:"ResearchUniversalGetListRankingsDomain",
+            shortServiceName:"GetListRankingsDomain",
+            responseExample: "Test",
+            id:"ResearchUniversal",
+            description:"Keyword rankings for a given domain in universal search results."
+        }
+    serviceCategory.universal.GetListRankingsDomain.fields =
+        {
+            countrycode:{desc:"Format: US, GB, DE etc",required:true},
+            url:{desc:"Format: domain.tld, subdomain.domain.tld",required:true},
+            limit:{desc:"Format: integer-Limit for the number of result rows",required:true},
+            offset:{desc:"Format: integer-Offset for result set",required:true}
+        }
+
+    serviceCategory.universal.GetListRankingsDomain =
+        {
+            fullServiceName:"ResearchUniversalGetListRankingsDomainFilter",
+            shortServiceName:"GetListRankingsDomainFilter",
+            responseExample: "Test",
+            id:"ResearchUniversal",
+            description:"Historic keyword rankings for a given domain in universal search results with filter options."
+        }
+    serviceCategory.universal.GetListRankingsDomain.fields =
+        {
+            countrycode:{desc:"Format: US, GB, DE etc",required:true},
+            date:{desc:"",required:true},
+            type:{desc:"",required:true},
+            url:{desc:"Format: domain.tld, subdomain.domain.tld",required:true},
+            currency:{desc:"Format: EUR, USD etc.",required:true},
+            limit:{desc:"Format: integer",required:true},
+            offset:{desc:"Format: integer",required:true},
+            position_from:{desc:"",required:true},
+            position_to:{desc:"Format: 2,3,4 etc",required:false},
+            search_volume_monthly_from:{desc:"Format: integer",required:true},
+            search_volume_monthly_to:{desc:"Format: integer",required:true},
+            traffic_monthly_from:{desc:"Format: integer",required:false},
+            traffic_monthly_to:{desc:"Format: integer",required:false}
+        }
+
+    serviceCategory.universal.GetListRankingsDomainHistoric =
+        {
+            fullServiceName:"ResearchUniversalGetListRankingsDomainHistoric",
+            shortServiceName:"GetListRankingsDomainHistoric",
+            responseExample: "Test",
+            id:"ResearchUniversal",
+            description:"Historic keyword rankings for a given domain in universal search results."
+        }
+    serviceCategory.universal.GetListRankingsDomainHistoric.fields =
+        {
+            countrycode:{desc:"Format: US, GB, DE etc",required:true},
+            date:{desc:"",required:true},
+            url:{desc:"Format: domain.tld, subdomain.domain.tld",required:true},
+            limit:{desc:"Format: integer",required:true},
+            offset:{desc:"Format: integer",required:true}
+        }
+
+    serviceCategory.universal.GetListVisibility =
+        {
+            fullServiceName:"ResearchUniversalGetListVisibility",
+            shortServiceName:"GetListVisibility",
+            responseExample: "Test",
+            id:"ResearchUniversal",
+            description:"Searchmetrics Visibility for Universal Search for a given URL in a given country."
+        }
+    serviceCategory.universal.GetListVisibility.fields =
+        {
+            countrycode:{desc:"Format: US, GB, DE etc",required:true},
+            date:{desc:"",required:true},
+            url:{desc:"Format: domain.tld, subdomain.domain.tld",required:true},
+            limit:{desc:"Format: integer",required:true},
+            offset:{desc:"Format: integer",required:true}
+        }
+    // </editor-fold>
+
+    //<editor-fold desc="RESEARCH SOCIAL">
+    serviceCategory.social.GetListFacebook =
+        {
+            fullServiceName:"ResearchSocialGetListFacebook",
+            shortServiceName:"GetListFacebook",
+            responseExample: "Test",
+            id:"ResearchSocial",
+            description:"Facebook interaction per URL for a given domain (likes, shares etc.)"
+        }
+    serviceCategory.social.GetListFacebook.fields =
+        {
+            url:{desc:"Format: domain.tld, subdomain.domain.tld",required:true},
+            limit:{desc:"Format: integer",required:true},
+            offset:{desc:"Format: integer",required:true}
+        }
+
+    serviceCategory.social.GetListTopUrls =
+        {
+            fullServiceName:"ResearchSocialGetListTopUrls",
+            shortServiceName:"GetListTopUrls",
+            responseExample: "Test",
+            id:"ResearchSocial",
+            description:"Social Visibility (Facebook, Twitter etc.) per URL for a given domain"
+        }
+    serviceCategory.social.GetListTopUrls.fields =
+        {
+            url:{desc:"Format: domain.tld, subdomain.domain.tld",required:true},
+            limit:{desc:"Format: integer",required:true},
+            offset:{desc:"Format: integer",required:true}
+        }
+
+    serviceCategory.social.GetValueSocialRank =
+        {
+            fullServiceName:"ResearchSocialGetValueSocialRank",
+            shortServiceName:"GetValueSocialRank",
+            responseExample: "Test",
+            id:"ResearchSocial",
+            description:"Social Visibility Rank for a given domain in a given country"
+        }
+    serviceCategory.social.GetValueSocialRank.fields =
+        {
+            url:{desc:"Format: domain.tld, subdomain.domain.tld",required:true},
+            countrycode:{desc:"Format: US, GB, DE etc",required:true}
+
+        }
+
+    serviceCategory.social.GetValueSocialSpread =
+        {
+            fullServiceName:"ResearchSocialGetValueSocialSpread",
+            shortServiceName:"GetValueSocialSpread",
+            responseExample: "Test",
+            id:"ResearchSocial",
+            description:"Social Spread for a given domain"
+        }
+    serviceCategory.social.GetValueSocialSpread.fields =
+        {
+            url:{desc:"Format: domain.tld, subdomain.domain.tld",required:true}
+        }
+
+    serviceCategory.social.GetValueVisibility =
+        {
+            fullServiceName:"ResearchSocialGetValueVisibility",
+            shortServiceName:"GetValueVisibility",
+            responseExample: "Test",
+            id:"ResearchSocial",
+            description:"Social Visibility for a given domain"
+        }
+    serviceCategory.social.GetValueVisibility.fields =
+        {
+            url:{desc:"Format: domain.tld, subdomain.domain.tld",required:true}
+        }
+    // </editor-fold>
+
+    //<editor-fold desc="RESEARCH CONTENT">
+    serviceCategory.content.GetListCompetitors =
+        {
+            fullServiceName:"ResearchContentGetListCompetitors",
+            shortServiceName:"GetListCompetitors",
+            responseExample: "Test",
+            id:"ResearchContent",
+            description:"Get the list of the top competitors of a given domain."
+        }
+    serviceCategory.content.GetListCompetitors.fields =
+        {
+            countrycode:{desc:"Format: US, GB, DE etc",required:true},
+            domain:{desc:"Format: domain.tld",required:true},
+            currency:{desc:"",required:false},
+            limit:{desc:"Format: integer",required:false},
+            offset:{desc:"Format: integer",required:false}
+        }
+
+    serviceCategory.content.GetListCompetitorUrls =
+        {
+            fullServiceName:"ResearchContentGetListCompetitorUrls",
+            shortServiceName:"GetListCompetitorUrls",
+            responseExample: "Test",
+            id:"ResearchContent",
+            description:"Get the list of competitors of a given url."
+        }
+    serviceCategory.content.GetListCompetitorUrls.fields =
+        {
+            countrycode:{desc:"Format: US, GB, DE etc",required:true},
+            url:{desc:"Format: domain.tld, subdomain.domain.tld",required:true},
+            limit:{desc:"Format: integer",required:false},
+            offset:{desc:"Format: integer",required:false}
+        }
+
+    serviceCategory.content.GetListLoserUrls =
+        {
+            fullServiceName:"ResearchContentGetListLoserUrls",
+            shortServiceName:"GetListLoserUrls",
+            responseExample: "Test",
+            id:"ResearchContent",
+            description:"Get the list of competitors of a given url."
+        }
+    serviceCategory.content.GetListLoserUrls.fields =
+        {
+            countrycode:{desc:"Format: US, GB, DE etc",required:true},
+            domain:{desc:"Format: US, GB, DE etc",required:true},
+            keyword_limit:{desc:"Format: US, GB, DE etc",required:true},
+            limit:{desc:"Format: US, GB, DE etc",required:true},
+            offset:{desc:"Format: US, GB, DE etc",required:true}
+        }
+
+    serviceCategory.content.GetListTopUrls =
+        {
+            fullServiceName:"ResearchContentGetListTopUrls",
+            shortServiceName:"GetListTopUrls",
+            responseExample: "Test",
+            id:"ResearchContent",
+            description:"Get the list of the top urls of a given domain."
+        }
+    serviceCategory.content.GetListTopUrls.fields =
+        {
+            countrycode:{desc:"Format: US, GB, DE etc",required:true},
+            domain:{desc:"Format: domain.tld",required:true},
+            keyword_limit:"required- Number of keywords",
+            limit:"required- Data limit ",
+            offset:"required- Data offset"
+        }
+
+    serviceCategory.content.GetListUrlKeywordRankings =
+        {
+            fullServiceName:"ResearchContentGetListUrlKeywordRankings",
+            shortServiceName:"GetListUrlKeywordRankings",
+            responseExample: "Test",
+            id:"ResearchContent",
+            description:"Get the list of keywords of a given url."
+        }
+    serviceCategory.content.GetListUrlKeywordRankings.fields =
+        {
+            countrycode:{desc:"Format: US, GB, DE etc",required:true},
+            url:"required- Format: domain.tld",
+            limit:"required- Format: integer",
+            offset:"required- Data offset"
+        }
+
+    serviceCategory.content.GetListUrlSocialSpread =
+        {
+            fullServiceName:"ResearchContentGetListUrlSocialSpread",
+            shortServiceName:"GetListUrlSocialSpread",
+            responseExample: "Test",
+            id:"ResearchContent",
+            description:"Get the list of keywords of a given url."
+        }
+    serviceCategory.content.GetListUrlSocialSpread.fields =
+        {
+            url:{desc:"Format: domain.tld, subdomain.domain.tld",required:true}
+        }
+
+    serviceCategory.content.GetListWinnerUrls =
+        {
+            fullServiceName:"ResearchContentGetListWinnerUrls",
+            shortServiceName:"GetListWinnerUrls",
+            responseExample: "Test",
+            id:"ResearchContent",
+            description:"Get the list of the winner urls of a given domain."
+        }
+    serviceCategory.content.GetListWinnerUrls.fields =
+        {
+            url:{desc:"Format: domain.tld, subdomain.domain.tld",required:true}
+        }
+
+    serviceCategory.content.GetValueCompetitorUrlCount =
+        {
+            fullServiceName:"ResearchContentGetValueCompetitorUrlCount",
+            shortServiceName:"GetValueCompetitorUrlCount",
+            responseExample: "Test",
+            id:"ResearchContent",
+            description:"Get the list of the winner urls of a given domain."
+        }
+    serviceCategory.content.GetValueCompetitorUrlCount.fields =
+        {
+            url:{desc:"Format: domain.tld, subdomain.domain.tld",required:true}
+        }
+
+    serviceCategory.content.GetValueSeoValue =
+        {
+            fullServiceName:"ResearchContentGetValueSeoValue",
+            shortServiceName:"GetValueSeoValue",
+            responseExample: "Test",
+            id:"ResearchContent",
+            description:"Get the SEO value and the SEO value potential of a given domain."
+        }
+    serviceCategory.content.GetValueSeoValue.fields =
+        {
+            countrycode:{desc:"Format: US, GB, DE etc",required:true},
+            currency:{desc:"Format: EUR, USD etc.",required:true},
+            domain:{desc:"Format: domain.tld",required:true},
+            url:{desc:"Format: domain.tld, subdomain.domain.tld",required:true}
+        }
+
+    serviceCategory.content.GetValueTrafficIndex =
+        {
+            fullServiceName:"ResearchContentGetValueTrafficIndex",
+            shortServiceName:"GetValueTrafficIndex",
+            responseExample: "Test",
+            id:"ResearchContent",
+            description:"Get the SEO value and the SEO value potential of a given domain."
+        }
+    serviceCategory.content.GetValueTrafficIndex.fields =
+        {
+            countrycode:{desc:"Format: US, GB, DE etc",required:true},
+            domain:{desc:"Format: domain.tld",required:true}
+        }
+
+    serviceCategory.content.GetValueUrlBacklinks =
+        {
+            fullServiceName:"ResearchContentGetValueUrlBacklinks",
+            shortServiceName:"GetValueUrlBacklinks",
+            responseExample: "Test",
+            id:"ResearchContent",
+            description:"Get the SEO value and the SEO value potential of a given domain."
+        }
+    serviceCategory.content.GetValueUrlBacklinks.fields =
+        {
+            countrycode:{desc:"Format: US, GB, DE etc",required:true},
+            url:{desc:"Format: domain.tld, subdomain.domain.tld",required:true}
+        }
+
+    serviceCategory.content.GetValueUrlCount =
+        {
+            fullServiceName:"ResearchContentGetValueUrlCount",
+            shortServiceName:"GetValueUrlCount",
+            responseExample: "Test",
+            id:"ResearchContent",
+            description:"Get the number of urls of a given domain."
+        }
+    serviceCategory.content.GetValueUrlCount.fields =
+        {
+            countrycode:{desc:"Format: US, GB, DE etc",required:true},
+            url:{desc:"Format: domain.tld, subdomain.domain.tld",required:true}
+        }
+
+    serviceCategory.content.GetValueUrlDomainTraffic =
+        {
+            fullServiceName:"ResearchContentGetValueUrlDomainTraffic",
+            shortServiceName:"GetValueUrlDomainTraffic",
+            responseExample: "Test",
+            id:"ResearchContent",
+            description:"Get the value of the traffic index of the given url and the whole domain."
+        }
+    serviceCategory.content.GetValueUrlDomainTraffic.fields =
+        {
+            countrycode:{desc:"Format: US, GB, DE etc",required:true},
+            url:{desc:"Format: domain.tld, subdomain.domain.tld",required:true}
+        }
+
+    serviceCategory.content.GetValueUrlKeywordCount =
+        {
+            fullServiceName:"ResearchContentGetValueUrlKeywordCount",
+            shortServiceName:"GetValueUrlKeywordCount",
+            responseExample: "Test",
+            id:"ResearchContent",
+            description:"Get the number of keywords of a given url and the average of the top 10 competitors."
+        }
+    serviceCategory.content.GetValueUrlKeywordCount.fields =
+        {
+            countrycode:{desc:"Format: US, GB, DE etc",required:true},
+            url:{desc:"Format: domain.tld, subdomain.domain.tld",required:true}
+        }
+
+    serviceCategory.content.GetValueUrlReferredDomains =
+        {
+            fullServiceName:"ResearchContentGetValueUrlReferredDomains",
+            shortServiceName:"GetValueUrlReferredDomains",
+            responseExample: "Test",
+            id:"ResearchContent",
+            description:"Get the number of keywords of a given url and the average of the top 10 competitors."
+        }
+    serviceCategory.content.GetValueUrlReferredDomains.fields =
+        {
+            countrycode:{desc:"Format: US, GB, DE etc",required:true},
+            url:{desc:"Format: domain.tld, subdomain.domain.tld",required:true}
+        }
+
+    serviceCategory.content.GetValueUrlSocialVisibility =
+        {
+            fullServiceName:"ResearchContentGetValueUrlSocialVisibility",
+            shortServiceName:"GetValueUrlSocialVisibility",
+            responseExample: "Test",
+            id:"ResearchContent",
+            description:"Get the social visibility of a given url."
+        }
+    serviceCategory.content.GetValueUrlSocialVisibility.fields =
+        {
+            countrycode:{desc:"Format: US, GB, DE etc",required:true},
+            url:{desc:"Format: domain.tld, subdomain.domain.tld",required:true}
+        }
+
+    serviceCategory.content.GetValueUrlTraffic =
+        {
+            fullServiceName:"ResearchContentGetValueUrlTraffic",
+            shortServiceName:"GetValueUrlTraffic",
+            responseExample: "Test",
+            id:"ResearchContent",
+            description:"Get the social visibility of a given url."
+        }
+    serviceCategory.content.GetValueUrlTraffic.fields =
+        {
+            countrycode:{desc:"Format: US, GB, DE etc",required:true},
+            url:{desc:"Format: domain.tld, subdomain.domain.tld",required:true}
+        }
+
+    serviceCategory.content.GetValueUrlWinnerLoserCount =
+        {
+            fullServiceName:"ResearchContentGetValueUrlWinnerLoserCount",
+            shortServiceName:"GetValueUrlWinnerLoserCount",
+            responseExample: "Test",
+            id:"ResearchContent",
+            description:"Get the social visibility of a given url."
+        }
+    serviceCategory.content.GetValueUrlWinnerLoserCount.fields =
+        {
+            countrycode:{desc:"Format: US, GB, DE etc",required:true},
+            url:{desc:"Format: domain.tld, subdomain.domain.tld",required:true}
+        }
+
+    //</editor-fold>
+
+    //<editor-fold desc="PROJECT ORGANIC">
+    serviceCategory.projectOrganic.GetListBenchmarkRankings =
+        {
+            fullServiceName:"ProjectOrganicGetListBenchmarkRankings",
+            shortServiceName:"GetListBenchmarkRankings",
+            responseExample: "Test",
+            id:"ProjectOrganic",
+            description:"Competitors rankings for benchmarks"
+        }
+    serviceCategory.projectOrganic.GetListBenchmarkRankings.fields =
+        {
+            project_id:{desc:"ID of the project that should be queried",required:true},
+            se_id:{desc:"ID of the search engine that should be queried",required:true},
+            urls:{desc:"",required:true}
+        }
+
+    serviceCategory.projectOrganic.GetListCompetitorRankings =
+        {
+            fullServiceName:"ProjectOrganicGetListCompetitorRankings",
+            shortServiceName:"GetListCompetitorRankings",
+            responseExample: "Test",
+            id:"ProjectOrganic",
+            description:"Competitors rankings for Competitors"
+        }
+    serviceCategory.projectOrganic.GetListCompetitorRankings.fields =
+        {
+            project_id:{desc:"ID of the project that should be queried",required:true},
+            se_id:{desc:"ID of the search engine that should be queried",required:true},
+            limit:{desc:"Format: integer -Permitted values are 10, 25, 50, 100, 250",required:false},
+            offset:{desc:"Format: integer-Offset for result set. Default is 0 ",required:false}
+        }
+
+    serviceCategory.projectOrganic.GetListDistributionKeywords =
+        {
+            fullServiceName:"ProjectOrganicGetListDistributionKeywords",
+            shortServiceName:"GetListDistributionKeywords",
+            responseExample: "Test",
+            id:"ProjectOrganic",
+            description:"This call returns the search device distribution for project's keywords. Get an insight about the devices your target audience is using to perform searches.Please note: The API key for this call must be from the account that owns the queried project. API keys from invited users do not work."
+        }
+    serviceCategory.projectOrganic.GetListDistributionKeywords.fields =
+        {
+            project_id:{desc:"ID of the project that should be queried",required:true},
+            se_id:{desc:"ID of the search engine that should be queried",required:true},
+            limit:{desc:"Format: integer -Permitted values are 10, 25, 50, 100, 250",required:false},
+            offset:{desc:"Format: integer-Offset for result set. Default is 0 ",required:false},
+            sort:{desc:"",required:false}
+        }
+
+    serviceCategory.projectOrganic.GetListKeywordPotentials =
+        {
+            fullServiceName:"ProjectOrganicGetListKeywordPotentials",
+            shortServiceName:"GetListKeywordPotentials",
+            responseExample: "Test",
+            id:"ProjectOrganic",
+            description:"Get the traffic potentials of your project keywords."
+        }
+    serviceCategory.projectOrganic.GetListKeywordPotentials.fields =
+        {
+            project_id:{desc:"ID of the project that should be queried",required:true},
+            se_id:{desc:"ID of the search engine that should be queried",required:true},
+            url:{desc:"Format: domain.tld, subdomain.domain.tld",required:true},
+            limit:{desc:"Format: integer -Permitted values are 10, 25, 50, 100, 250",required:false},
+            offset:{desc:"Format: integer-Offset for result set. Default is 0 ",required:false}
+        }
+
+    serviceCategory.projectOrganic.GetListLosers =
+        {
+            fullServiceName:"ProjectOrganicGetListLosers",
+            shortServiceName:"GetListLosers",
+            responseExample: "Test",
+            id:"ProjectOrganic",
+            description:"Keywords with the highest absolute losses in organic search traffic for a given project domain.This call returns the keywords with the biggest losses in absolute search volumes in comparison to the previous week for a given project domain."
+        }
+    serviceCategory.projectOrganic.GetListLosers.fields =
+        {
+            project_id:{desc:"ID of the project that should be queried",required:true},
+            se_id:{desc:"ID of the search engine that should be queried",required:true},
+            url:{desc:"Format: domain.tld, subdomain.domain.tld",required:true},
+            date_from:{desc:"Format: YYYYMMDD-Start date",required:false},
+            date_to:{desc:"Format: YYYYMMDD-End date",required:false},
+            limit:{desc:"Format: integer -Permitted values are 10, 25, 50, 100, 250",required:false},
+            offset:{desc:"Format: integer-Offset for result set. Default is 0 ",required:false}
+        }
+
+    serviceCategory.projectOrganic.GetListMarketShare =
+        {
+            fullServiceName:"ProjectOrganicGetListMarketShare",
+            shortServiceName:"GetListMarketShare",
+            responseExample: "Test",
+            id:"ProjectOrganic",
+            description:"MarketShare for a project or benchmark domain in organic search results.This call returns the marketshare for the monitored keywords for a domain (either a project or a benchmark domain) in the organic search results in a given country.Please note: The API key for this call must be from the account that owns the queried project. API keys from invited users do not work."
+        }
+    serviceCategory.projectOrganic.GetListMarketShare.fields =
+        {
+            project_id:{desc:"ID of the project that should be queried",required:true},
+            se_id:{desc:"ID of the search engine that should be queried",required:true},
+            url:{desc:"Format: domain.tld, subdomain.domain.tld",required:true},
+            date_from:{desc:"Format: YYYYMMDD-Start date",required:false},
+            date_to:{desc:"Format: YYYYMMDD-End date",required:false},
+            tags:{desc:"",required:false}
+        }
+
+    serviceCategory.projectOrganic.GetListPositionSpreadHistoric =
+        {
+            fullServiceName:"ProjectOrganicGetListPositionSpreadHistoric",
+            shortServiceName:"GetListPositionSpreadHistoric",
+            responseExample: "Test",
+            id:"ProjectOrganic",
+            description:"Get the historic ranking distribution of the project among the top five search results by positions.Position Spread indicates the percentage ranking distribution for the selected tag, domain and search engine combination.Please note that a certain subscription level may be needed to use this call."
+        }
+    serviceCategory.projectOrganic.GetListPositionSpreadHistoric.fields =
+        {
+            date_to:{desc:"Format: YYYYMMDD-End date",required:true},
+            limit:{desc:"Format: integer-Limit for the number of result rows",required:true},
+            project_id:{desc:"ID of the project that should be queried",required:true},
+            se_id:{desc:"ID of the search engine that should be queried",required:true},
+            url:{desc:"Format: domain.tld, subdomain.domain.tld",required:true},
+            tags:{desc:"",required:false}
+        }
+
+    serviceCategory.projectOrganic.GetListRankings =
+        {
+            fullServiceName:"ProjectOrganicGetListRankings",
+            shortServiceName:"GetListRankings",
+            responseExample: "Test",
+            id:"ProjectOrganic",
+            description:"This call returns the rankings for the monitored keywords for a domain (either a project or a benchmark domain) in the organic search results.The results contain a lot of additional information (please check result description)."
+        }
+    serviceCategory.projectOrganic.GetListRankings.fields =
+        {
+            project_id:{desc:"ID of the project that should be queried",required:true},
+            se_id:{desc:"ID of the search engine that should be queried",required:true},
+            url:{desc:"Format: domain.tld, subdomain.domain.tld",required:true},
+            limit:{desc:"Format: integer-Limit for the number of result rows",required:true},
+            offset:{desc:"Format: integer-Offset for result set",required:true},
+            sort:{desc:"",required:false},
+            tags:{desc:"",required:false},
+            trend_interval:{desc:"Set the time range for the trend comparisons",required:false}
+        }
+
+    serviceCategory.projectOrganic.GetListRankingsFilter =
+        {
+            fullServiceName:"ProjectOrganicGetListRankingsFilter",
+            shortServiceName:"GetListRankingsFilter",
+            responseExample: "Test",
+            id:"ProjectOrganic",
+            description:"This call returns the rankings for the monitored keywords for a domain (either a project or a benchmark domain) in the organic search results.The results contain a lot of additional information (please check result description)."
+        }
+    serviceCategory.projectOrganic.GetListRankingsFilter.fields =
+        {
+            project_id:{desc:"ID of the project that should be queried",required:true},
+            se_id:{desc:"ID of the search engine that should be queried",required:true},
+            url:{desc:"Format: domain.tld, subdomain.domain.tld",required:true},
+            cpc_from:{desc:"",required:true},
+            cpc_to:{desc:"",required:true},
+            date:{desc:"",required:false},
+            limit:{desc:"Format: integer -Permitted values are 10, 25, 50, 100, 250",required:false},
+            offset:{desc:"Format: integer-Offset for result set. Default is 0 ",required:false},
+            only_best_current:{desc:"",required:false},
+            position_from:{desc:"Format: string-Filter: Lowest ranking of keywords",required:false},
+            position_to:{desc:"Format: 2,3,4 etc",required:false},
+            searchvolume_from:{desc:"",required:false},
+            searchvolume_to:{desc:"",required:false},
+            tags:{desc:"",required:false},
+            traffic_from:{desc:"",required:false},
+            traffic_to:{desc:"",required:false},
+            trend_interval:{desc:"Set the time range for the trend comparisons",required:false},
+            type:{desc:"",required:false}
+        }
+
+    serviceCategory.projectOrganic.GetListRankingsHistoric =
+        {
+            fullServiceName:"ProjectOrganicGetListRankingsHistoric",
+            shortServiceName:"GetListRankingsHistoric",
+            responseExample: "Test",
+            id:"ProjectOrganic",
+            description:"Historic keyword rankings for a project or benchmark domain in organic search results."
+        }
+    serviceCategory.projectOrganic.GetListRankingsHistoric.fields =
+        {
+            project_id:{desc:"ID of the project that should be queried",required:true},
+            se_id:{desc:"ID of the search engine that should be queried",required:true},
+            url:{desc:"Format: domain.tld, subdomain.domain.tld",required:true},
+            date:{desc:"",required:true},
+            limit:{desc:"Format: integer-Limit for the number of result rows",required:true},
+            offset:{desc:"Format: integer-Offset for result set. Default is 0 ",required:false},
+            trend_interval:{desc:"Set the time range for the trend comparisons",required:false}
+        }
+
+    serviceCategory.projectOrganic.GetListSeoVisibilityHistoric =
+        {
+            fullServiceName:"ProjectOrganicGetListSeoVisibilityHistoric",
+            shortServiceName:"GetListSeoVisibilityHistoric",
+            responseExample: "Test",
+            id:"ProjectOrganic",
+            description:"Historic keyword rankings for a project or benchmark domain in organic search results."
+        }
+    serviceCategory.projectOrganic.GetListSeoVisibilityHistoric.fields =
+        {
+            date_from:{desc:"Format: YYYYMMDD-Start date",required:true},
+            date_to:{desc:"Format: YYYYMMDD-End date",required:true},
+            project_id:{desc:"ID of the project that should be queried",required:true},
+            se_id:{desc:"ID of the search engine that should be queried",required:true},
+            url:{desc:"Format: domain.tld, subdomain.domain.tld",required:true},
+            tags:{desc:"",required:false}
+        }
+
+    serviceCategory.projectOrganic.GetListSeoVisibilityHistoric =
+        {
+            fullServiceName:"ProjectOrganicGetListSeoVisibilityHistoric",
+            shortServiceName:"GetListSeoVisibilityHistoric",
+            responseExample: "Test",
+            id:"ProjectOrganic",
+            description:"Project SEO Visibility differs from general SEO Visibility in that it uses a project’s selected keywords to evaluate visibility. It is made up of ranking keywords’ search volumes and positions. Within these figures, each position is ranked individually according to factors determined by Searchmetrics. The nature of a keyword, as either a ranking or navigational keyword, equally influences SEO visibility."
+        }
+    serviceCategory.projectOrganic.GetListSeoVisibilityHistoric.fields =
+        {
+            date_from:{desc:"Format: YYYYMMDD-Start date",required:true},
+            date_to:{desc:"Format: YYYYMMDD-End date",required:true},
+            project_id:{desc:"ID of the project that should be queried",required:true},
+            se_id:{desc:"ID of the search engine that should be queried",required:true},
+            url:{desc:"Format: domain.tld, subdomain.domain.tld",required:true},
+            tags:{desc:"",required:false}
+        }
+
+    serviceCategory.projectOrganic.GetListTagPotentials =
+        {
+            fullServiceName:"ProjectOrganicGetListTagPotentials",
+            shortServiceName:"GetListTagPotentials",
+            responseExample: "Test",
+            id:"ProjectOrganic",
+            description:"Project SEO Visibility differs from general SEO Visibility in that it uses a project’s selected keywords to evaluate visibility. It is made up of ranking keywords’ search volumes and positions. Within these figures, each position is ranked individually according to factors determined by Searchmetrics. The nature of a keyword, as either a ranking or navigational keyword, equally influences SEO visibility."
+        }
+    serviceCategory.projectOrganic.GetListTagPotentials.fields =
+        {
+            project_id:{desc:"ID of the project that should be queried",required:true},
+            se_id:{desc:"ID of the search engine that should be queried",required:true},
+            url:{desc:"Format: domain.tld, subdomain.domain.tld",required:true}
+        }
+
+    serviceCategory.projectOrganic.GetListUniversalVisibility =
+        {
+            fullServiceName:"ProjectOrganicGetListUniversalVisibility",
+            shortServiceName:"GetListUniversalVisibility",
+            responseExample: "Test",
+            id:"ProjectOrganic",
+            description:"Universal visibility for a project or benchmark domain in organic search results."
+        }
+    serviceCategory.projectOrganic.GetListUniversalVisibility.fields =
+        {
+            date_from:{desc:"Format: YYYYMMDD-Start date",required:true},
+            date_to:{desc:"Format: YYYYMMDD-End date",required:true},
+            project_id:{desc:"ID of the project that should be queried",required:true},
+            se_id:{desc:"ID of the search engine that should be queried",required:true},
+            url:{desc:"Format: domain.tld, subdomain.domain.tld",required:true},
+            tags:{desc:"",required:false},
+            types:{desc:"",required:false}
+        }
+
+    serviceCategory.projectOrganic.GetListUrlRankings =
+        {
+            fullServiceName:"ProjectOrganicGetListUrlRankings",
+            shortServiceName:"GetListUrlRankings",
+            responseExample: "Test",
+            id:"ProjectOrganic",
+            description:"URL rankings for a project or benchmark domain in organic search results.This call returns the rankings for the monitored keywords for a domain (either a project or a benchmark domain) in the organic search results in a given country, based on the latest month available in the database."
+        }
+    serviceCategory.projectOrganic.GetListUrlRankings.fields =
+        {
+            project_id:{desc:"ID of the project that should be queried",required:true},
+            se_id:{desc:"ID of the search engine that should be queried",required:true},
+            url:{desc:"Format: domain.tld, subdomain.domain.tld",required:true},
+            limit:{desc:"Format: integer -Permitted values are 10, 25, 50, 100, 250",required:false},
+            offset:{desc:"Format: integer-Offset for result set. Default is 0 ",required:false},
+            trend_interval:{desc:"Set the time range for the trend comparisons",required:false}
+        }
+
+    serviceCategory.projectOrganic.GetListWinners =
+        {
+            fullServiceName:"ProjectOrganicGetListWinners",
+            shortServiceName:"GetListWinners",
+            responseExample: "Test",
+            id:"ProjectOrganic",
+            description:"Keywords with the highest absolute gains in organic search traffic for a given project domain."
+        }
+    serviceCategory.projectOrganic.GetListWinners.fields =
+        {
+            project_id:{desc:"ID of the project that should be queried",required:true},
+            se_id:{desc:"ID of the search engine that should be queried",required:true},
+            urls:{desc:"",required:true},
+            date_from:{desc:"Format: YYYYMMDD-Start date",required:false},
+            date_to:{desc:"Format: YYYYMMDD-End date",required:false},
+            limit:{desc:"Format: integer -Permitted values are 10, 25, 50, 100, 250",required:false},
+            offset:{desc:"Format: integer-Offset for result set. Default is 0 ",required:false}
+        }
+
+    serviceCategory.projectOrganic.GetValueMarketshare =
+        {
+            fullServiceName:"ProjectOrganicGetValueMarketshare",
+            shortServiceName:"GetValueMarketshare",
+            responseExample: "Test",
+            id:"ProjectOrganic",
+            description:"Get the Marketshare for a project or for the tags of a project.This call returns the Searchmetrics Marketshare in the organic search for a project based on the latest data in our database.Please note: The API key for this call must be from the account that owns the queried project. API keys from invited users do not work."
+        }
+    serviceCategory.projectOrganic.GetValueMarketshare.fields =
+        {
+            project_id:{desc:"ID of the project that should be queried",required:true},
+            se_id:{desc:"ID of the search engine that should be queried",required:true},
+            url:{desc:"Format: domain.tld, subdomain.domain.tld",required:true},
+            tags:{desc:"",required:false},
+            trend_interval:{desc:"Set the time range for the trend comparisons",required:false}
+        }
+
+    serviceCategory.projectOrganic.GetValueSeoVisibility =
+        {
+            fullServiceName:"ProjectOrganicGetValueSeoVisibility",
+            shortServiceName:"GetValueSeoVisibility",
+            responseExample: "Test",
+            id:"ProjectOrganic",
+            description:"Get the SEO visibility for a project or for the tags of a project.This call returns the Searchmetrics Visibility in the organic search for a project based on the latest data in our database. Project SEO Visibility differs from general SEO Visibility in that it uses a project selected keywords to evaluate visibility."
+        }
+    serviceCategory.projectOrganic.GetValueSeoVisibility.fields =
+        {
+            project_id:{desc:"ID of the project that should be queried",required:true},
+            se_id:{desc:"ID of the search engine that should be queried",required:true},
+            url:{desc:"Format: domain.tld, subdomain.domain.tld",required:true},
+            tags:{desc:"",required:false},
+            trend_interval:{desc:"Set the time range for the trend comparisons",required:false}
+        }
+
+    // </editor-fold>
+
+    //<editor-fold desc="PROJECT LINKS">
+    serviceCategory.links.GetListBenchmarkTable =
+        {
+            fullServiceName:"ProjectLinksGetListBenchmarkTable",
+            shortServiceName:"GetListBenchmarkTable",
+            responseExample: "Test",
+            id:"ProjectLinks",
+            description:"Backlink benchmark table for selected benchmarks of a project."
+        }
+    serviceCategory.links.GetListBenchmarkTable.fields =
+        {
+            project_id:{desc:"ID of the project that should be queried",required:true},
+            urls:{desc:"",required:true}
+        }
+    // </editor-fold>
+
+    //<editor-fold desc="PROJECT OPTIMIZATION">
+    serviceCategory.projectOptimization.GetListContentDetail =
+        {
+            fullServiceName:"ProjectOptimizationGetListContentDetail",
+            shortServiceName:"GetListContentDetail",
+            responseExample: "Test",
+            id:"ProjectOptimization",
+            description:"Retrieve data for a content opt crawl."
+        }
+    serviceCategory.projectOptimization.GetListContentDetail.fields =
+        {
+            project_id:{desc:"ID of the project that should be queried",required:true}
+        }
+
+    serviceCategory.projectOptimization.GetListContentOverview =
+        {
+            fullServiceName:"ProjectOptimizationGetListContentOverview",
+            shortServiceName:"GetListContentOverview",
+            responseExample: "Test",
+            id:"ProjectOptimization",
+            description:"List of available content opt crawls"
+        }
+    serviceCategory.projectOptimization.GetListContentOverview.fields =
+        {
+            project_id:{desc:"ID of the project that should be queried",required:true}
+        }
+
+    serviceCategory.projectOptimization.GetListContentStatus =
+        {
+            fullServiceName:"ProjectOptimizationGetListContentStatus",
+            shortServiceName:"GetListContentStatus",
+            responseExample: "Test",
+            id:"ProjectOptimization",
+            description:"Status of a content opt crawl"
+        }
+    serviceCategory.projectOptimization.GetListContentStatus.fields =
+        {
+            project_id:{desc:"ID of the project that should be queried",required:true},
+            crawl_id:{desc:"",required:true}
+        }
+
+    serviceCategory.projectOptimization.GetListDomainErrors =
+        {
+            fullServiceName:"ProjectOptimizationGetListDomainErrors",
+            shortServiceName:"GetListDomainErrors",
+            responseExample: "Test",
+            id:"ProjectOptimization",
+            description:"Site optimization: errors, warnings and notices."
+        }
+    serviceCategory.projectOptimization.GetListDomainErrors.fields =
+        {
+            project_id:{desc:"ID of the project that should be queried",required:true}
+        }
+
+    serviceCategory.projectOptimization.GetListKeywordUrls =
+        {
+            fullServiceName:"ProjectOptimizationGetListKeywordUrls",
+            shortServiceName:"GetListKeywordUrls",
+            responseExample: "Test",
+            id:"ProjectOptimization",
+            description:"Listing of the keyword optimization URLs."
+        }
+    serviceCategory.projectOptimization.GetListKeywordUrls.fields =
+        {
+            project_id:{desc:"ID of the project that should be queried",required:true},
+            date:{desc:"",required:true},
+            limit:{desc:"Format: integer-Limit for the number of result rows",required:true},
+            offset:{desc:"Format: integer-Offset for result set",required:true}
+        }
+
+    serviceCategory.projectOptimization.GetListUrlCondition =
+        {
+            fullServiceName:"ProjectOptimizationGetListUrlCondition",
+            shortServiceName:"GetListUrlCondition",
+            responseExample: "Test",
+            id:"ProjectOptimization",
+            description:"Listing of the keyword optimization URLs."
+        }
+    serviceCategory.projectOptimization.GetListUrlCondition.fields =
+        {
+            project_id:{desc:"ID of the project that should be queried",required:true}
+        }
+
+    serviceCategory.projectOptimization.GetValueDomainScore =
+        {
+            fullServiceName:"ProjectOptimizationGetValueDomainScore",
+            shortServiceName:"GetValueDomainScore",
+            responseExample: "Test",
+            id:"ProjectOptimization",
+            description:"Get the current Optimization Domain Score with a trend for the last crawl."
+        }
+    serviceCategory.projectOptimization.GetValueDomainScore.fields =
+        {
+            project_id:{desc:"ID of the project that should be queried",required:true}
+        }
+
+    serviceCategory.projectOptimization.PostValueContentRequest =
+        {
+            fullServiceName:"ProjectOptimizationPostValueContentRequest",
+            shortServiceName:"PostValueContentRequest",
+            responseExample: "Test",
+            id:"ProjectOptimization",
+            description:"Request a content opt crawl"
+        }
+    serviceCategory.projectOptimization.PostValueContentRequest.fields =
+        {
+            keyword:{desc:"",required:true},
+            project_id:{desc:"ID of the project that should be queried",required:true},
+            se_id:{desc:"ID of the search engine that should be queried",required:true},
+            additional_keywords:{desc:"",required:true},
+            name:{desc:"",required:true},
+            text:{desc:"",required:true},
+            url:{desc:"Format: domain.tld, subdomain.domain.tld",required:true}
+        }
+    // </editor-fold>
+
+    //<editor-fold desc="PROJECT TRAFFIC">
+
+    serviceCategory.projectTraffic.ProjectTrafficChannelhistory =
+        {
+            fullServiceName:"ProjectTrafficChannelhistory",
+            shortServiceName:"Channelhistory",
+            responseExample: "Test",
+            id:"ProjectTraffic",
+            description:"Project traffic channel performances comparison"
+        }
+    serviceCategory.projectTraffic.ProjectTrafficChannelhistory.fields =
+        {
+            date_from:{desc:"Format: YYYYMMDD-Start date",required:true},
+            date_to:{desc:"Format: YYYYMMDD-End date",required:true},
+            project_id:{desc:"ID of the project that should be queried",required:true}
+        }
+
+    serviceCategory.projectTraffic.ProjectTrafficGetListForecastKeywords =
+        {
+            fullServiceName:"ProjectTrafficGetListForecastKeywords",
+            shortServiceName:"GetListForecastKeywords",
+            responseExample: "Test",
+            id:"ProjectTraffic",
+            description:"Keyword traffic potentials.This call returns the traffic potentials of the actual keywords set, and allows forcast based on target positions."
+        }
+    serviceCategory.projectTraffic.ProjectTrafficGetListForecastKeywords.fields =
+        {
+            date_from:{desc:"Format: YYYYMMDD-Start date",required:true},
+            date_to:{desc:"Format: YYYYMMDD-End date",required:true},
+            domain:{desc:"Format: domain.tld",required:true},
+            project_id:{desc:"ID of the project that should be queried",required:true},
+            se_id:{desc:"ID of the search engine that should be queried",required:true},
+            currency:{desc:"Format: EUR, USD etc.",required:true},
+            forecast:{desc:"",required:true},
+            forecast_from:{desc:"",required:true},
+            forecast_to:{desc:"",required:true},
+            limit:{desc:"Format: integer-Limit for the number of result rows",required:true},
+            offset:{desc:"Format: integer-Offset for result set",required:true},
+            sort:{desc:"Format: string-Default value: -svi_trend",required:true}
+        }
+
+    serviceCategory.projectTraffic.ProjectTrafficGetListKeywordTrafficPotentials =
+        {
+            fullServiceName:"ProjectTrafficGetListKeywordTrafficPotentials",
+            shortServiceName:"GetListKeywordTrafficPotentials",
+            responseExample: "Test",
+            id:"ProjectTraffic",
+            description:"Get a list of keyword traffic potentials.The keyword traffic potentials table displays keywords that have attracted visits to the project domain for the selected time period and search engine, but also have a low potential utilization. Additional the SEO traffic potential (calculated through Google / AdWords) for keywords without SEO traffic is displayed. Results are sorted automatically, increasing according to traffic potential utilization."
+        }
+    serviceCategory.projectTraffic.ProjectTrafficGetListKeywordTrafficPotentials.fields =
+        {
+            date_from:{desc:"Format: YYYYMMDD-Start date",required:true},
+            date_to:{desc:"Format: YYYYMMDD-End date",required:true},
+            domain:{desc:"Format: domain.tld",required:true},
+            project_id:{desc:"ID of the project that should be queried",required:true},
+            se_id:{desc:"ID of the search engine that should be queried",required:true},
+            currency:{desc:"Format: EUR, USD etc.",required:true},
+            forecast:{desc:"",required:true},
+            forecast_from:{desc:"",required:true},
+            forecast_to:{desc:"",required:true},
+            limit:{desc:"Format: integer-Limit for the number of result rows",required:true},
+            offset:{desc:"Format: integer-Offset for result set",required:true},
+            sort:{desc:"Format: string-Default value: -svi_trend",required:true}
+        }
+
+    serviceCategory.projectTraffic.ProjectTrafficUserSignals =
+        {
+            fullServiceName:"ProjectTrafficUserSignals",
+            shortServiceName:"UserSignals",
+            responseExample: "Test",
+            id:"ProjectTraffic",
+            description:"Project traffic user signals."
+        }
+    serviceCategory.projectTraffic.ProjectTrafficUserSignals.fields =
+        {
+            date_from:{desc:"Format: YYYYMMDD-Start date",required:true},
+            date_to:{desc:"Format: YYYYMMDD-End date",required:true},
+            project_id:{desc:"ID of the project that should be queried",required:true},
+            se_id:{desc:"ID of the search engine that should be queried",required:true}
+        }
+
+    // </editor-fold>
+
+    //<editor-fold desc="PROJECT KEYWORDS">
+
+    serviceCategory.projectKeywords.ProjectKeywordsGetLastUpdateDate =
+        {
+            fullServiceName:"ProjectKeywordsGetLastUpdateDate",
+            shortServiceName:"GetLastUpdateDate",
+            responseExample: "Test",
+            id:"ProjectKeywords",
+            description:"This value will give you the actual date for your keyword rankings."
+        }
+    serviceCategory.projectKeywords.ProjectKeywordsGetLastUpdateDate.fields =
+        {
+            project_id:{desc:"ID of the project that should be queried",required:true},
+            se_id:{desc:"ID of the search engine that should be queried",required:true}
+        }
+
+    serviceCategory.projectKeywords.ProjectKeywordsGetLastUpdateDate =
+        {
+            fullServiceName:"ProjectKeywordsGetLastUpdateDate",
+            shortServiceName:"GetLastUpdateDate",
+            responseExample: "Test",
+            id:"ProjectKeywords",
+            description:"This value will give you the actual date for your keyword rankings."
+        }
+    serviceCategory.projectKeywords.ProjectKeywordsGetLastUpdateDate.fields =
+        {
+            project_id:{desc:"ID of the project that should be queried",required:true},
+            se_id:{desc:"ID of the search engine that should be queried",required:true}
+        }
+
+    serviceCategory.projectKeywords.ProjectKeywordsGetLastUpdateDate =
+        {
+            fullServiceName:"ProjectKeywordsGetLastUpdateDate",
+            shortServiceName:"GetLastUpdateDate",
+            responseExample: "Test",
+            id:"ProjectKeywords",
+            description:"This value will give you the actual date for your keyword rankings."
+        }
+    serviceCategory.projectKeywords.ProjectKeywordsGetLastUpdateDate.fields =
+        {
+            project_id:{desc:"ID of the project that should be queried",required:true},
+            se_id:{desc:"ID of the search engine that should be queried",required:true}
+        }
+
+
+    // </editor-fold>
+
+    //<editor-fold desc="PROJECT SOCIAL">
+
+    serviceCategory.projectSocial.ProjectSocialDeleteUrl =
+        {
+            fullServiceName:"ProjectSocialDeleteUrl",
+            shortServiceName:"DeleteUrl",
+            responseExample: "Test",
+            id:"ProjectSocial",
+            description:"This value will give you the actual date for your keyword rankings."
+        }
+    serviceCategory.projectSocial.ProjectSocialDeleteUrl.fields =
+        {
+            id:{desc:"",required:true},
+            project_id:{desc:"ID of the project that should be queried",required:true}
+        }
+
+    serviceCategory.projectSocial.ProjectSocialGetListUrls =
+        {
+            fullServiceName:"ProjectSocialGetListUrls",
+            shortServiceName:"GetListUrls",
+            responseExample: "Test",
+            id:"ProjectSocial",
+            description:"List urls for a given project."
+        }
+    serviceCategory.projectSocial.ProjectSocialGetListUrls.fields =
+        {
+            id:{desc:"",required:true},
+            project_id:{desc:"ID of the project that should be queried",required:true}
+        }
+
+    serviceCategory.projectSocial.ProjectSocialGetListVisibilityUrls =
+        {
+            fullServiceName:"ProjectSocialGetListVisibilityUrls",
+            shortServiceName:"GetListVisibilityUrls",
+            responseExample: "Test",
+            id:"ProjectSocial",
+            description:"Get the visbility for all observed urls for a given project."
+        }
+    serviceCategory.projectSocial.ProjectSocialGetListVisibilityUrls.fields =
+        {
+            end_ts:{desc:"",required:true},
+            project_id:{desc:"ID of the project that should be queried",required:true},
+            start_ts:{desc:"",required:true},
+            limit:{desc:"Format: integer-Limit for the number of result rows",required:true},
+            offset:{desc:"Format: integer-Offset for result set",required:true},
+            sort:{desc:"Format: string-Default value: -svi_trend",required:true}
+        }
+
+    serviceCategory.projectSocial.ProjectSocialPostAddUrls =
+        {
+            fullServiceName:"ProjectSocialPostAddUrls",
+            shortServiceName:"PostAddUrls",
+            responseExample: "Test",
+            id:"ProjectSocial",
+            description:"Add urls for a given project."
+        }
+    serviceCategory.projectSocial.ProjectSocialPostAddUrls.fields =
+        {
+            end_ts:{desc:"",required:true},
+            project_id:{desc:"ID of the project that should be queried",required:true},
+            start_ts:{desc:"",required:true},
+            limit:{desc:"Format: integer-Limit for the number of result rows",required:true},
+            offset:{desc:"Format: integer-Offset for result set",required:true},
+            sort:{desc:"Format: string-Default value: -svi_trend",required:true}
+        }
+
+    // </editor-fold>
+
+    //<editor-fold desc="PROJECT PERFORMANCE">
+
+    serviceCategory.projectPerformance.ProjectPerformanceGetListUrlRankings =
+        {
+            fullServiceName:"ProjectPerformanceGetListUrlRankings",
+            shortServiceName:"GetListUrlRankings",
+            responseExample: "Test",
+            id:"ProjectPerformance",
+            description:"Add urls for a given project."
+        }
+    serviceCategory.projectPerformance.ProjectPerformanceGetListUrlRankings.fields =
+        {
+            project_id:{desc:"ID of the project that should be queried",required:true},
+            se_id:{desc:"ID of the search engine that should be queried",required:true},
+            url:{desc:"Format: domain.tld, subdomain.domain.tld",required:true},
+            keyword_limit:{desc:"Format: integer-Limit for the number of result rows",required:true},
+            limit:{desc:"Format: integer-Limit for the number of result rows",required:true},
+            offset:{desc:"Format: integer-Offset for result set",required:true},
+            trend_interval:{desc:"Set the time range for the trend comparisons",required:false}
+        }
+    // </editor-fold>
+
+
+    services.push(serviceCategory.organic);
+    services.push(serviceCategory.keywords);
+    services.push(serviceCategory.paid);
+    services.push(serviceCategory.links);
+    services.push(serviceCategory.universal);
+    services.push(serviceCategory.social);
+    services.push(serviceCategory.content);
+    services.push(serviceCategory.projectOrganic);
+    services.push(serviceCategory.projectOptimization);
+    services.push(serviceCategory.projectTraffic);
+    services.push(serviceCategory.projectKeywords);
+    services.push(serviceCategory.projectSocial);
+    services.push(serviceCategory.projectPerformance);
+    services.push(serviceCategory.projectLinks);
+
+    //console.log(services);
+
+</script>

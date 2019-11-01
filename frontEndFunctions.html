@@ -1,0 +1,437 @@
+<script>
+
+frontEnd = {};
+//Helper Function to get the correct service
+frontEnd.getCorrectServices = function(selectedValue)
+{
+
+    var correctServices = [];
+    for (var i = 0; i< services.length; i++) {
+        currentServiceCategory = services[i];
+        //console.log(currentServiceCategory);
+
+        for (var key in currentServiceCategory) {
+            // skip loop if the property is from prototype
+            if (!currentServiceCategory.hasOwnProperty(key)) continue;
+
+            var obj = currentServiceCategory[key];
+            for (var prop in obj) {
+                // skip loop if the property is from prototype
+                if(!obj.hasOwnProperty(prop)) continue;
+                //console.log(prop + " = " + obj[prop]);
+                if (obj[prop] === selectedValue)
+                {
+                    correctServices.push(obj.shortServiceName);
+                }
+            }
+        }
+    }
+    return correctServices;
+}
+
+// Function to show correct service to ui
+frontEnd.showCorrectService = function(e)
+{
+    var selectedValue = e.target.value;
+    if (selectedValue != undefined)
+    {
+        var services = frontEnd.getCorrectServices(selectedValue);
+        var select = document.getElementById("select");
+        select.innerHTML ="";
+        for (var i = 0; i< services.length; i++)
+        {
+            var option = document.createElement("option");
+            option.innerHTML =services[i];
+            option.setAttribute("value",services[i]);
+            select.appendChild(option);
+        }
+
+    }
+    else
+    {
+        return;
+    }
+    frontEnd.createFields();
+}
+
+
+frontEnd.removeDataValidStatus = function()
+{
+    var data = [];
+    var dataServices = document.querySelectorAll('[data-service]');
+    for (var i =0; i< dataServices.length; i++ )
+    {
+        var service = dataServices[i];
+        service.classList.remove('active');
+    }
+}
+
+// Helper function to get Correct field
+frontEnd.findCorrectField = function()
+{
+    var researchName = frontEnd.getResearchName();
+    var shortName = frontEnd.getShortName();
+
+    var selectedField = researchName+shortName;
+    var fields;
+    for (var i = 0; i< services.length; i++)
+    {
+        currentServiceCategory = services[i];
+        //console.log(currentServiceCategory);
+
+        for (var key in currentServiceCategory)
+        {
+            // skip loop if the property is from prototype
+            if (!currentServiceCategory.hasOwnProperty(key)) continue;
+
+            var obj = currentServiceCategory[key];
+
+            for (var prop in obj)
+            {
+                //console.log(prop + " = " + obj[prop]);
+                if (obj[prop] === selectedField)
+                {
+
+                    for (var prop2 in obj)
+                    {
+                        //console.log(prop2 + " = " + obj[prop2]);
+                        if (!obj.hasOwnProperty(prop2)) continue;
+                        if(prop2 === "fields")
+                            fields =obj[prop2];
+                    }
+                    //console.log(fields);
+                    return fields;
+                }
+            }
+        }
+    }
+}
+
+
+// Helper Function to get selected ResearchName-Version (fullNameVersion)
+frontEnd.getResearchName = function()
+{
+    var researchRadioButtons = document.getElementsByName("service");
+
+    for (var i = 0; i < researchRadioButtons.length; i++)
+    {
+        if (researchRadioButtons[i].checked)
+        {
+            return researchRadioButtons[i].value;
+        }
+    }
+}
+
+
+
+// Helper Function to get selected Short-Name Version
+frontEnd.getShortName = function()
+{
+    var selects = document.getElementById("select");
+    var selectedValue = selects.options[selects.selectedIndex].value;
+    return selectedValue;
+}
+
+
+
+frontEnd.createFields = function()
+{
+    var researchName = frontEnd.getResearchName();
+    var shortName = frontEnd.getShortName();
+
+    var selectedService = researchName+shortName;
+    console.log(selectedService);
+    var fields = frontEnd.findCorrectField();
+
+    var fieldHolder = document.getElementById("fieldHolder");
+    fieldHolder.innerHTML ="";
+
+
+    for (var key in fields)
+    {
+        var field = fields[key];
+
+        if (!fields.hasOwnProperty(key)) continue;
+        //console.log(field + " = " + fields[field]);
+
+        var inputField = document.createElement("div");
+        inputField.classList ="form-group";
+
+        var label = document.createElement("label");
+        label.setAttribute("for", key);
+        label.innerHTML = key;
+
+        var input = document.createElement("input");
+        input.style ="width: 250px;";
+        input.setAttribute("type","text");
+        input.setAttribute("placeholder", (field.required ? 'required' : 'optional')+' - '+field.desc);
+        input.setAttribute("data-service",selectedService);
+        input.setAttribute("id",key);
+        input.setAttribute("data-required",field.required ? '1' : '0');
+
+        var formValidationField = document.createElement("div");
+        formValidationField.classList ="formValidationField";
+
+        inputField.appendChild(label);
+        inputField.appendChild(input);
+        inputField.appendChild(formValidationField);
+        fieldHolder.appendChild(inputField);
+    }
+}
+
+
+
+
+//Helper function to return Info from Service Object
+frontEnd.getServiceInfo = function(selectedService,returnedInfo)
+{
+
+    var info ="";
+
+    for (var i = 0; i< services.length; i++)
+    {
+        currentServiceCategory = services[i];
+        //console.log(currentServiceCategory);
+
+        for (var key in currentServiceCategory)
+        {
+            // skip loop if the property is from prototype
+            if (!currentServiceCategory.hasOwnProperty(key)) continue;
+
+            //console.dir(key + " = " + currentServiceCategory[key]);
+
+            if (key === selectedService)
+            {
+                return currentServiceCategory[key];
+            }
+            var obj = currentServiceCategory[key];
+
+            for (var prop in obj)
+            {
+                //console.log(prop + " = " + obj[prop]);
+                if (obj[prop] === selectedService)
+                {
+                    for (var prop2 in obj)
+                    {
+                        //console.log(prop2 + " = " + obj[prop2]);
+                        if (!obj.hasOwnProperty(prop2)) continue;
+
+
+                        if(prop2 === returnedInfo)
+                            info = obj[prop2];
+                    }
+                    //console.log("frontEnd",info);
+                    return info;
+                }
+            }
+        }
+    }
+}
+
+
+//Collect API-Key and API-Secret
+frontEnd.collectApiData = function()
+{
+    var data = [];
+    var apiData = {};
+    var apiKey = document.getElementById("apikey").value;
+    var apiSecret = document.getElementById("apisecret").value;
+    apiData.apiKey = apiKey;
+    apiData.apiSecret = apiSecret;
+    data.push(apiData);
+    return data;
+}
+
+//Collect Data from Input Field and return Array
+frontEnd.collectDataFromFields = function()
+{
+    var data = [];
+    var dataServices = document.querySelectorAll('[data-service]');
+    for (var i =0; i< dataServices.length; i++ )
+    {
+        var parameter = dataServices[i].id;
+        var value = dataServices[i].value;
+        var required = dataServices[i].dataset.required;
+
+        var keyValuePair = {key:parameter,val:value,el:dataServices[i],required:required};
+
+        data.push(keyValuePair)
+    }
+    console.log(data);
+    return data;
+}
+
+
+frontEnd.collectDataFromFieldsForAPI = function()
+{
+    var data = [];
+    var dataServices = document.querySelectorAll('[data-service]');
+    console.dir(dataServices);
+    for (var i =0; i< dataServices.length; i++ )
+    {
+        var parameter = dataServices[i].id;
+        var value = dataServices[i].value;
+
+
+        var keyValuePair = {key:parameter,val:value};
+
+        data.push(keyValuePair)
+    }
+    return data;
+}
+
+frontEnd.disableGetDataButton = function()
+{
+    var button = document.getElementById("getDataFromApi").setAttribute("disabled","");
+}
+
+frontEnd.activateGetDataButton = function()
+{
+    var button = document.getElementById("getDataFromApi").removeAttribute("disabled");
+}
+
+//Collect ServiceName for API Call
+frontEnd.getServiceName = function()
+{
+    var dataServices = document.querySelectorAll('[data-service]');
+    return dataServices[0].getAttribute("data-service");
+}
+
+// Invoke functions "Collect" to get all Data and send to Backend
+frontEnd.getDataFromApi = function()
+{
+    var dataFromFields = frontEnd.collectDataFromFieldsForAPI();
+    var fullServiceName = frontEnd.getServiceName();
+    frontEnd.disableGetDataButton();
+    //console.log(dataFromFields);
+    //console.log(fullServiceName);
+    google.script.run.withSuccessHandler(frontEnd.activateGetDataButton).fireSearchmetricsRequest(fullServiceName,dataFromFields);
+}
+
+
+//Function Show User API-Request Status
+
+frontEnd.showAuthenticateResponse = function(success)
+{
+    console.log('showAuthenticateResponse',success);
+    frontEnd.authResponse({isAuthenticated:success});
+}
+
+
+frontEnd.sendApiDataToBackend = function()
+{
+    var apiData = frontEnd.collectApiData();
+    console.log("Test",apiData[0].apiKey);
+    if (apiData[0].apiKey !== "" && apiData[0].apiSecret !== "")
+    {
+        google.script.run.withSuccessHandler(frontEnd.showAuthenticateResponse).getTokenFromSearchmetrics(apiData);
+        //console.log("frontEnd: Data has been sent");
+    }
+    else
+    {
+        frontEnd.showAuthenticateResponse(false);
+    }
+
+
+
+
+}
+
+
+
+
+
+/**
+ **Server-Side-Communication Example Begins
+ **/
+frontEnd.showInfo = function()
+{
+    var researchName = frontEnd.getResearchName();
+    var shortName = frontEnd.getShortName();
+    var selectedService = researchName+shortName;
+    var info = frontEnd.getServiceInfo(selectedService,"description")
+
+    google.script.run.withSuccessHandler(frontEnd.ready).processForm(info);
+    //document.getElementById("insert-text").innerHTML = "Processing..";
+}
+frontEnd.ready = function()
+{
+    //document.getElementById("insert-text").innerHTML = "Processed!"
+
+
+}
+
+frontEnd.uiLoaded = function ()
+{
+    console.log("uiLoaded");
+    google.script.run.withSuccessHandler(frontEnd.authResponse).checkAuth();
+}
+
+frontEnd.onClearToken = function ()
+{
+  google.script.run.withSuccessHandler(frontEnd.clearAuthResponse).clearAuth();
+}
+
+frontEnd.clearAuthResponse = function ()
+{
+  frontEnd.authResponse({isAuthenticated:false});
+}
+
+frontEnd.authResponse = function(response)
+{
+     console.log("authResponse",response);
+     console.log("authResponse",document.getElementsByClassName('form-not-authenticated'));
+   if (response.isAuthenticated)
+   {
+       document.getElementsByClassName('form-not-authenticated')[0].style.display = 'none';
+       document.getElementsByClassName('form-authenticated')[0].style.display = 'block';
+       document.getElementsByClassName('form-authenticated')[0].style.marginLeft = '0px';
+       document.getElementById('selectionWrapper').style.display ='block';
+   }
+   else
+   {
+       document.getElementsByClassName('form-not-authenticated')[0].style.display = 'block';
+       document.getElementsByClassName('form-authenticated')[0].style.display = 'none';
+       document.getElementsByClassName('form-authenticated')[0].style.marginLeft = '0px';
+       document.getElementById('selectionWrapper').style.display ='none';
+   }
+}
+
+
+
+//Example for Live-Validation not in use
+/*
+
+var to;
+document.getElementById("fieldHolder").addEventListener('keyup', function(e)
+{
+
+    to ? clearTimeout(to) : false;
+   to = setTimeout(function ()
+   {
+      console.log('user stopped typing')
+   },600)
+    //console.log("keyup keyup: ",e);
+}, false);
+
+document.getElementById("fieldHolder").addEventListener('blur', function(e)
+{
+    //var elem = evt.srcElement || evt.target;
+    console.log("blur capture: ",e);
+}, true);
+
+*/
+
+
+
+//Set eventListener for action
+document.getElementById("clearToken").addEventListener("click",frontEnd.onClearToken);
+document.getElementById("authenticate").addEventListener("click",frontEnd.sendApiDataToBackend);
+//document.getElementById("apisecret").addEventListener("blur",frontEnd.sendApiDataToBackend);
+//document.getElementById("getDataFromApi").addEventListener("click",frontEnd.getDataFromApi);
+document.getElementById("getDataFromApi").addEventListener("click",formValidation.formValidator);
+document.getElementById("showInfo").addEventListener("click",frontEnd.showInfo);
+document.getElementById("select").addEventListener("change", frontEnd.createFields);
+document.getElementById("researchSelection").addEventListener("click",frontEnd.showCorrectService);
+frontEnd.uiLoaded();
+</script>

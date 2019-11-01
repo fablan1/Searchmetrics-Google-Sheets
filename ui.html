@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <base target="_top">
+    <link rel="stylesheet" href="https://ssl.gstatic.com/docs/script/css/add-ons1.css">
+    <!-- The CSS package above applies Google styling to buttons and other elements. -->
+    <?!= include('frontEndCSS'); ?>
+</head>
+<body>
+<div class="sidebar branding-below">
+
+        <div class="inline form-group form-not-authenticated">
+            <label for="apikey">API-Key</label>
+            <input type="text" id="apikey" style="width: 200px;" value="123802d33598b36945bbe3e3f37a7e488be988c6">
+            <label for="apisecret">API-Secret</label>
+            <input type="text" id="apisecret" style="width: 200px;" value="c4f60ea6dee8418d28ea9b0e171deb1a967f0dd7">
+            <button class="blue" id="authenticate">Authenticate</button>
+        </div>
+
+         <div class="inline form-group form-authenticated">
+            <label>Your are already authenticated!</label>
+            <button class="blue" id="clearToken">Clear Token</button>
+          </div>
+        <div id="apiStatus"> </div>
+        <div class="block col-contain" id="selectionWrapper">
+            <div id="researchSelection">
+                <div class="col-one">
+                    <b>Research</b>
+                    <div>
+                        <input type="radio" name="service" id="researchOrganic" value="ResearchOrganic" checked="checked">
+                        <label for="ResearchOrganic">Organic</label>
+                    </div>
+                    <div>
+                        <input type="radio" name="service" id="researchKeywords" value="ResearchKeywords">
+                        <label for="ResearchKeywords">Keywords</label>
+                    </div>
+                    <div>
+                        <input type="radio" name="service" id="researchPaid" value="ResearchPaid">
+                        <label for="ResearchPaid">Paid</label>
+                    </div>
+                    <div>
+                        <input type="radio" name="service" id="researchLinks" value="ResearchLinks">
+                        <label for="ResearchLinks">Links</label>
+                    </div>
+                    <div>
+                        <input type="radio" name="service" id="researchUniversal" value="ResearchUniversal">
+                        <label for="ResearchUniversal">Universal</label>
+                    </div>
+                    <div>
+                        <input type="radio" name="service" id="researchSocial" value="ResearchSocial">
+                        <label for="ResearchSocial">Social</label>
+                    </div>
+                    <div>
+                        <input type="radio" name="service" id="researchContent" value="ResearchContent">
+                        <label for="ResearchContent">Content</label>
+                    </div>
+                </div>
+
+
+                <div class="col-one">
+                    <b>Project</b>
+                    <div>
+                        <input type="radio" name="service" id="projectOrganic" value="ProjectOrganic">
+                        <label for="ProjectOrganic">Organic</label>
+                    </div>
+                    <div>
+                        <input type="radio" name="service" id="projectLinks" value="ProjectLinks">
+                        <label for="ProjectLinks">Links</label>
+                    </div>
+                    <div>
+                        <input type="radio" name="service" id="projectOptimization" value="ProjectOptimization">
+                        <label for="ProjectOptimization">Optimization</label>
+                    </div>
+                    <div>
+                        <input type="radio" name="service" id="projectTraffic" value="ProjectTraffic">
+                        <label for="ProjectTraffic">Traffic</label>
+                    </div>
+                    <div>
+                        <input type="radio" name="service" id="projectKeywords" value="ProjectKeywords">
+                        <label for="ProjectKeywords">Keywords</label>
+                    </div>
+                    <div>
+                        <input type="radio" name="service" id="projectSocial" value="ProjectSocial">
+                        <label for="ProjectSocial">Social</label>
+                    </div>
+                    <div>
+                        <input type="radio" name="service" id="projectPerformance" value="ProjectPerformance">
+                        <label for="ProjectPerformance">Performance</label>
+                    </div>
+                </div>
+            </div>
+            <div class="block form-group">
+                <label for="select">Call</label>
+                <select id="select">
+                    <option selected>GetCountDomainKeyword</option>
+                    <option>GetCountDomainKeywordFilter</option>
+                    <option>GetCountDomainKeywordHistoric</option>
+                    <option>GetListCommonKeywords</option>
+                    <option>GetListCompetitors</option>
+                    <option>GetListIndustrySpread</option>
+                    <option>GetListRankingsDomain</option>
+                    <option>GetListRankingsDomainFilter</option>
+                    <option>GetListRankingsDomainHistoric</option>
+                    <option>GetListRankingsKeyword</option>
+                    <option>GetListRankingsKeywordHistoric</option>
+                    <option>GetListRankingsKeywordLongtail</option>
+                    <option>GetListSeoVisibilityCountry</option>
+                    <option>GetListSeoVisibilityTop100Losers</option>
+                    <option>GetListSeoVisibilityTop100Winners</option>
+                    <option>GetOrganicGetListSerpSpread</option>
+                    <option>GetOrganicGetListSubdomains</option>
+                    <option>GetValueSeoRank</option>
+                    <option>GetValueSeoVisibility</option>
+                    <option>GetValueSeoVisibilityWorld</option>
+                    <option>GetValueTrafficValue</option>
+                </select>
+            </div>
+
+            <div id="fieldHolder">
+                <!--- <div class="inline form-group">
+                     <label for="city">City</label>
+                     <input type="text" id="city" style="width: 150px;" placeholder="required">
+                 </div> --->
+            </div>
+            <div class="block">
+                <input type="checkbox" id="save-prefs">
+                <label for="save-prefs">Use these languages by default</label>
+            </div>
+
+            <div class="block" id="button-bar">
+                <button class="blue" id="getDataFromApi">Get Data</button>
+                <button id="showInfo">Info</button>
+            </div>
+        </div>
+
+    <?!= include('formValidation'); ?>
+    <?!= include('apiServices'); ?>
+    <?!= include('frontEndFunctions'); ?>
+
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js">
+    </script>
+</div>
+</body>
+</html>
